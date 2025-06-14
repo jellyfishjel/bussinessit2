@@ -26,7 +26,7 @@ with tab1:
     st.header("📌 Introduction")
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-    <p>The “Education and Career Success” dataset provides valuable insights into the relationship
+    <p>The <b>“Education Career Success”<b> dataset provides valuable insights into the relationship
     between academic background, career progression, and financial outcomes. By delving into various
     categories of this dataset, we can uncover valuable insights into how different fields of study,
     academic performance, and practical experiences impact career satisfaction, work-life balance, and
@@ -56,9 +56,12 @@ with tab2:
     """, unsafe_allow_html=True)
 
     st.markdown("""
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
+    <p> 
     - Predicting job success based on education  
     - Identifying key factors influencing salaries  
-    - Understanding the role of networking and internships in career growth  
+    - Understanding the role of networking and internships in career growth </p>
+    </div>
     """)
 
     st.subheader("Preview of Dataset")
