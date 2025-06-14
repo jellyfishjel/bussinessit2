@@ -12,6 +12,11 @@ df = load_data()
 # Set up the app layout
 st.set_page_config(page_title="Education & Career Success", layout="wide")
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+
+local_css("style/style.css")
 
 # Create tab navigation
 tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 Variable Explanation"])
