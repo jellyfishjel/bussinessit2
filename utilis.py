@@ -4,7 +4,6 @@ st.markdown("""
         * {
             font-family: 'Inter', sans-serif;
         }
-
         section[data-testid="stSidebar"],
         section[data-testid="stSidebar"] * {
             color: #333 !important;
