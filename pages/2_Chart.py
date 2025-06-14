@@ -6,6 +6,7 @@ from scipy.stats import gaussian_kde
 import numpy as np
 
 st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
@@ -20,7 +21,7 @@ df = load_data()
 
 
 # Sidebar Filters
-st.sidebar.title("Global Filters")
+st.sidebar.title("Filters")
 
 # Gender Filter - Multiselect
 gender_options = sorted(df['Gender'].dropna().unique())
@@ -60,17 +61,126 @@ if show_no:
     selected_statuses.append("No")
 
 if not (show_yes or show_no):
-    st.sidebar.warning("⚠️ No gender selected. Using full data. Please choose at least one option..")
+    st.sidebar.warning("⚠️ No status selected. Using full data. Please choose at least one option.")
     selected_statuses = ['Yes', 'No']
 
 color_map = {'Yes': '#FFD700', 'No': '#004080'}
 
 # Main Tabs
-graph_tab = st.tabs(["📊 Age & Job Offers", "📈 Age & Demographics"])
+graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
-# === TAB 1 ===
+# === TAB 1 (Demographics) ===
 with graph_tab[0]:
-    st.title("Entrepreneurship and Job Offers by Age")
+    st.title("Demographics")
+
+    chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
+
+    df_demo = gender_filtered[
+        (gender_filtered['Current_Job_Level'] == selected_level) &
+        (gender_filtered['Age'].between(age_range[0], age_range[1])) &
+        (gender_filtered['Entrepreneurship'].isin(selected_statuses))
+    ]
+
+    if df_demo.empty:
+        st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
+    else:
+        if chart_option == 'Gender Distribution':
+            with st.container():
+                st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
+                        <div>
+                            <div style="font-size: 14px; color: #555;">Total Records</div>
+                            <div style="font-size: 28px;">{}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 14px; color: #555;">Median Age</div>
+                            <div style="font-size: 28px;">{:.1f}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 14px; color: #555;">% Female</div>
+                            <div style="font-size: 28px;">{:.1f}%</div>
+                        </div>
+                    </div></div>
+                """.format(len(df_demo), df_demo['Age'].median(),
+                           (df_demo['Gender'] == 'Female').mean() * 100),
+                unsafe_allow_html=True)
+
+        else:
+            top_fields = df_demo['Field_of_Study'].value_counts().head(3).index.tolist()
+            display_fields = ", ".join(top_fields) if top_fields else "N/A"
+            with st.container():
+                st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
+                        <div>
+                            <div style="font-size: 14px; color: #555;">Total Records</div>
+                            <div style="font-size: 28px;">{}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 14px; color: #555;">Top 3 Fields</div>
+                            <div style="font-size: 20px;">{}</div>
+                        </div>
+                    </div></div>
+                """.format(len(df_demo), display_fields),
+                unsafe_allow_html=True)
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            fig_density = go.Figure()
+            group_col = 'Gender' if chart_option == 'Gender' else 'Field_of_Study'
+            title = f"Age Distribution by {group_col.replace('_', ' ')}"
+            categories = df_demo[group_col].dropna().unique()
+
+            for cat in categories:
+                age_data = df_demo[df_demo[group_col] == cat]['Age']
+                if len(age_data) > 1:
+                    kde = gaussian_kde(age_data)
+                    x_vals = np.linspace(age_range[0], age_range[1], 100)
+                    y_vals = kde(x_vals)
+                    fig_density.add_trace(go.Scatter(
+                        x=x_vals,
+                        y=y_vals,
+                        mode='lines',
+                        name=str(cat),
+                        fill='tozeroy'
+                    ))
+
+            fig_density.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                title=title,
+                xaxis_title="Age",
+                yaxis_title="Density",
+                height=500,
+                margin=dict(t=40, l=40, r=40, b=80),
+                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
+            )
+            st.plotly_chart(fig_density, use_container_width=True)
+
+        with col2:
+            if chart_option == 'Gender Distribution':
+                counts = df_demo['Gender'].value_counts().reset_index()
+                counts.columns = ['Gender', 'Count']
+                labels, values = counts['Gender'], counts['Count']
+            else:
+                counts = df_demo['Field_of_Study'].value_counts().reset_index()
+                counts.columns = ['Field of Study', 'Count']
+                labels, values = counts['Field of Study'], counts['Count']
+
+            fig_donut = go.Figure(data=[go.Pie(labels=labels, values=values, hole=0.5)])
+            fig_donut.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                title=f"{chart_option} Distribution (Donut Chart)",
+                height=350,
+                margin=dict(t=40, l=40, r=40, b=40),
+                showlegend=True
+            )
+            st.plotly_chart(fig_donut, use_container_width=True)
+
+# === TAB 2 (Job Offers) ===
+with graph_tab[1]:
+    st.title("Job Offers")
 
     df_filtered = gender_filtered[
         (gender_filtered['Current_Job_Level'] == selected_level) &
@@ -81,16 +191,25 @@ with graph_tab[0]:
     if df_filtered.empty:
         st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
     else:
-        # Key Indicators - TAB 1
-        k1, k2, k3 = st.columns(3)
-        with k1:
-            st.metric("Total Records", len(df_filtered))
-        with k2:
-            median_age = df_filtered['Age'].median()
-            st.metric("Median Age", f"{median_age:.1f}")
-        with k3:
-            entre_percent = (df_filtered['Entrepreneurship'] == "Yes").mean() * 100
-            st.metric("Entrepreneurs (%)", f"{entre_percent:.1f}%")
+        with st.container():
+            st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
+                    <div>
+                        <div style="font-size: 14px; color: #555;">Total Records</div>
+                        <div style="font-size: 28px;">{}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; color: #555;">Median Age</div>
+                        <div style="font-size: 28px;">{:.1f}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; color: #555;">Entrepreneurs (%)</div>
+                        <div style="font-size: 28px;">{:.1f}%</div>
+                    </div>
+                </div></div>
+            """.format(len(df_filtered), df_filtered['Age'].median(),
+                       (df_filtered['Entrepreneurship'] == "Yes").mean() * 100),
+            unsafe_allow_html=True)
 
         df_grouped = (
             df.groupby(['Current_Job_Level', 'Age', 'Entrepreneurship'])
@@ -161,6 +280,8 @@ with graph_tab[0]:
             ))
 
         fig_line.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
             margin=dict(t=40, l=40, r=40, b=40),
             legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
@@ -190,88 +311,3 @@ with graph_tab[0]:
             st.plotly_chart(fig_bar, use_container_width=True)
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
-
-# === TAB 2 ===
-with graph_tab[1]:
-    st.title("Demographics by Age")
-
-    chart_option = st.selectbox("Select Variable for Visualization", ['Gender', 'Field of Study'])
-
-    df_demo = gender_filtered[
-        (gender_filtered['Current_Job_Level'] == selected_level) &
-        (gender_filtered['Age'].between(age_range[0], age_range[1])) &
-        (gender_filtered['Entrepreneurship'].isin(selected_statuses))
-    ]
-
-    if df_demo.empty:
-        st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
-    else:
-        k1, k2, k3 = st.columns(3)
-        with k1:
-            st.metric("Total Records", len(df_demo))
-        with k2:
-            if chart_option == 'Gender':
-                percent_female = (df_demo['Gender'] == 'Female').mean() * 100
-                st.metric("% Female", f"{percent_female:.1f}%")
-            else:
-                unique_fields = df_demo['Field_of_Study'].nunique()
-                st.metric("Unique Fields of Study", unique_fields)
-        with k3:
-            if chart_option == 'Gender':
-                st.metric("Median Age", f"{df_demo['Age'].median():.1f}")
-            else:
-                top_field = df_demo['Field_of_Study'].mode().iloc[0] if not df_demo['Field_of_Study'].mode().empty else "N/A"
-                st.metric("Most Common Field", top_field)
-
-        col1, col2 = st.columns(2)
-
-        # Density Area Chart
-        with col1:
-            fig_density = go.Figure()
-            group_col = 'Gender' if chart_option == 'Gender' else 'Field_of_Study'
-            title = f"Age Distribution by {group_col.replace('_', ' ')}"
-            categories = df_demo[group_col].dropna().unique()
-
-            for cat in categories:
-                age_data = df_demo[df_demo[group_col] == cat]['Age']
-                if len(age_data) > 1:
-                    kde = gaussian_kde(age_data)
-                    x_vals = np.linspace(age_range[0], age_range[1], 100)
-                    y_vals = kde(x_vals)
-                    fig_density.add_trace(go.Scatter(
-                        x=x_vals,
-                        y=y_vals,
-                        mode='lines',
-                        name=str(cat),
-                        fill='tozeroy'
-                    ))
-
-            fig_density.update_layout(
-                title=title,
-                xaxis_title="Age",
-                yaxis_title="Density",
-                height=500,
-                margin=dict(t=40, l=40, r=40, b=80),
-                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
-            )
-            st.plotly_chart(fig_density, use_container_width=True)
-
-        # Donut Chart
-        with col2:
-            if chart_option == 'Gender':
-                counts = df_demo['Gender'].value_counts().reset_index()
-                counts.columns = ['Gender', 'Count']
-                labels, values = counts['Gender'], counts['Count']
-            else:
-                counts = df_demo['Field_of_Study'].value_counts().reset_index()
-                counts.columns = ['Field of Study', 'Count']
-                labels, values = counts['Field of Study'], counts['Count']
-
-            fig_donut = go.Figure(data=[go.Pie(labels=labels, values=values, hole=0.5)])
-            fig_donut.update_layout(
-                title=f"{chart_option} Distribution (Donut Chart)",
-                height=350,
-                margin=dict(t=40, l=40, r=40, b=40),
-                showlegend=True
-            )
-            st.plotly_chart(fig_donut, use_container_width=True)
