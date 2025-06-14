@@ -92,13 +92,6 @@ color_map = {'Yes': '#FFD700', 'No': '#004080'}
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
-job_level_notes = {
-    "Entry": "Entry-level individuals often have limited job offers and are exploring entrepreneurial paths.",
-    "Mid": "Mid-level professionals typically receive more offers and may begin considering starting their own ventures.",
-    "Senior": "Senior-level roles see more consistent job offers and may shift focus from entrepreneurship to mentorship or leadership.",
-    "Manager": "Managers show a balanced trend between job stability and entrepreneurial aspirations.",
-    "Executive": "Executives tend to receive fewer job offers but are more likely to engage in entrepreneurship based on strategic vision."
-}
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 36px;'>Demographics</h1>
@@ -210,6 +203,22 @@ with graph_tab[0]:
             st.plotly_chart(fig_donut, use_container_width=True)
 
 # === TAB 2 (Job Offers) ===
+job_level_notes = {
+    "Entry": "Entry-level individuals often have limited job offers and are exploring entrepreneurial paths.",
+    "Mid": "Mid-level professionals typically receive more offers and may begin considering starting their own ventures.",
+    "Senior": "Senior-level roles see more consistent job offers and may shift focus from entrepreneurship to mentorship or leadership.",
+    "Manager": "Managers show a balanced trend between job stability and entrepreneurial aspirations.",
+    "Executive": "Executives tend to receive fewer job offers but are more likely to engage in entrepreneurship based on strategic vision."
+}
+
+job_offers_notes = {
+    "Entry": "Job offers are lower for fresh graduates, with entrepreneurship interest still forming.",
+    "Mid": "Job offers increase steadily; some begin side businesses.",
+    "Senior": "Seniors receive stable offers and may act as advisors.",
+    "Manager": "Managers juggle leadership roles and may explore startup ideas.",
+    "Executive": "Executives have fewer but high-value offers, often founding startups or investing."
+}
+
 with graph_tab[1]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 36px;'>Job Offers</h1>
@@ -348,25 +357,36 @@ with graph_tab[1]:
             st.plotly_chart(fig_bar, use_container_width=True)
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
-        # Display a more stylish note box
-        note = job_level_notes.get(selected_level, "No specific notes available for this level.")
-        st.markdown(f"""
+        # Add dual note boxes below the two charts
+        note_bar = job_level_notes.get(selected_level, "No specific notes available for this level.")
+        note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
+        
+        note_style = """
         <div style="
             background-color: #fff4ec;
             border-left: 6px solid #cf5a2e;
             padding: 18px 22px;
-            margin-top: 35px;
+            margin-top: 25px;
             border-radius: 12px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
             font-family: 'Segoe UI', sans-serif;
         ">
             <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
-                📌 Note for <span style="text-transform: capitalize;">{selected_level}</span> Level
+                📌 {title}
             </div>
             <div style="font-size: 15px; color: #444;">
-                {note}
+                {text}
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """
+        
+        note_col1, note_col2 = st.columns(2)
+        
+        with note_col1:
+            st.markdown(note_style.format(title=f"Bar Chart Note – {selected_level}", text=note_bar), unsafe_allow_html=True)
+        
+        with note_col2:
+            st.markdown(note_style.format(title=f"Line Chart Note – {selected_level}", text=note_line), unsafe_allow_html=True)
+
 
 
