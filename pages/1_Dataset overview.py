@@ -57,10 +57,9 @@ with tab2:
 
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-    <p> 
-    - Predicting job success based on education  
-    - Identifying key factors influencing salaries  
-    - Understanding the role of networking and internships in career growth </p>
+    <p> - Predicting job success based on education  
+        - Identifying key factors influencing salaries  
+        - Understanding the role of networking and internships in career growth </p>
     </div>
     """)
 
