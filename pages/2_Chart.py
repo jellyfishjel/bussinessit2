@@ -13,6 +13,12 @@ def load_data():
 
 df = load_data()
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+
+local_css("style/style.css")
+
 # Sidebar Filters
 st.sidebar.title("Global Filters")
 
@@ -123,6 +129,8 @@ with graph_tab[0]:
         )
 
         fig_bar.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
             margin=dict(t=40, l=40, r=40, b=40),
             legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
