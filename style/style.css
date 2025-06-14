@@ -1,23 +1,18 @@
-/* ========== GOOGLE FONTS ========== */
+/* ====== GOOGLE FONTS ====== */
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
 
-/* ========== GLOBAL FONTS ========== */
-html, body, div, p, span, stMarkdown, h1, h2, h3 {
+/* ====== GLOBAL FONT ====== */
+html, body, div, p, span, stMarkdown, li, ul, table {
     font-family: 'Inter', sans-serif;
 }
 
-/* Headings use Bungee font */
-.stHeader, .homepage h1, .team-title {
-    font-family: 'Bungee', sans-serif !important;
-}
-
-/* ========== BACKGROUND STYLES ========== */
+/* ====== BACKGROUND STYLES ====== */
 /* Sidebar gradient */
 [data-testid=stSidebar] {
   background-image: linear-gradient(#ebe5d4, #e6c3bc);
 }
 
-/* App background with soft radial gradient */
+/* App background gradient */
 [data-testid="stAppViewContainer"] {
    background:
       radial-gradient(at top right, #e6c3bc, transparent 70%),
@@ -30,41 +25,59 @@ header[data-testid="stHeader"] {
     background-color: #ebe5d4;
 }
 
-/* ========== TEXT + UI STYLES ========== */
+/* ====== HOMEPAGE ELEMENTS ====== */
 
-/* Main page title */
+/* Title on homepage using Bungee */
+h1.bungee-title, .main-banner, .our-team {
+    font-family: 'Bungee', sans-serif !important;
+    color: #cf5a2e;
+    text-align: center;
+}
+
+/* Optional class if reused */
+.our-team {
+    font-size: 36px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: black;
+}
+
+/* ==== TEAM NAME TEXT ==== */
+.team-name {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+}
+
+/* ====== INTRODUCTION TABS & SECTION HEADINGS ====== */
+
 .main-title {
     font-size: 36px;
     color: #333;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
-/* Section subtitles (e.g., Introduction, Overview) */
-.section-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: 1rem;
-    margin-bottom: 0.3rem;
-}
-
-/* Paragraph text for explanations */
 .intro-text {
     font-size: 17px;
     margin-bottom: 1rem;
     line-height: 1.6;
+    color: #222;
 }
 
-/* Section headers in orange (for categories) */
 .orange-title {
     color: #cf5a2e;
     font-size: 24px;
+    font-weight: 600;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
 
-/* List style inside tabs (e.g., variable explanations) */
 .variable-list {
     font-size: 15px;
     margin-left: 1.5rem;
     line-height: 1.6;
+    color: #444;
 }
