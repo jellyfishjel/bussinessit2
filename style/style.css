@@ -27,12 +27,13 @@ header[data-testid="stHeader"] {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
-/* ===== Use Inter font for all text ===== */
+
+/* Inter for all body text */
 html, body, div, p, span {
     font-family: 'Inter', sans-serif;
 }
 
-/* Apply Bungee to all h1–h3, markdown headers, and st header class */
+/* Bungee for all headings */
 h1, h2, h3,
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
 .block-container h1, .block-container h2, .block-container h3,
