@@ -32,7 +32,7 @@ st.markdown("""
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px 20px 30px;
+            padding: 5px 20px 30px;
         }
 
         .homepage h1 {
