@@ -34,9 +34,14 @@ html, body, div, p, span {
 }
 
 /* Bungee for all headings */
-h1, h2, h3,
-.stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
-.block-container h1, .block-container h2, .block-container h3,
-[data-testid="stHeader"] h1, [data-testid="stHeader"] h2, [data-testid="stHeader"] h3 {
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
+
+/* Use Inter font for all text */
+html, body, div, p, span {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Keep Bungee for main headings */
+h1, h2, h3, .stHeader, .stMarkdown h1, .stMarkdown h2, .homepage h1, .team-title {
     font-family: 'Bungee', sans-serif !important;
 }
