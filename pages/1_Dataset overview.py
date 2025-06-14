@@ -81,7 +81,7 @@ with tab2:
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
     st.markdown("""
-    <h1 style='font-family: Inter, sans-serif; font-size: 30 px; color: #cf5a2e;'>📊 Variable Explanation</h1>
+    <h1 style='font-family: Inter, sans-serif; font-size: 30px; color: #cf5a2e;'>📊 Variable Explanation</h1>
     """, unsafe_allow_html=True)
 
     # Section 1: Student Information
