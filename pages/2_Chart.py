@@ -93,8 +93,10 @@ graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
 with graph_tab[0]:
-    st.markdown("<h1 style='font-size: 32px; font-weight: bold; margin-bottom: 20px; color: #222;'>Demographics</h1>", unsafe_allow_html=True)
-
+    st.markdown("""
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 48px;'>📊 Variable Explanation</h1>
+    """, unsafe_allow_html=True)
+    
     chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
 
     df_demo = gender_filtered[
