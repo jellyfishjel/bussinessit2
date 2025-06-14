@@ -1,19 +1,70 @@
-/* Sidebar - gradient and clean look */
-/* Change the sidebar color*/
-[data-testid=stSidebar] {
-  background-image: linear-gradient(#ebe5d4,#e6c3bc);
+/* ========== GOOGLE FONTS ========== */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
+
+/* ========== GLOBAL FONTS ========== */
+html, body, div, p, span, stMarkdown {
+    font-family: 'Inter', sans-serif;
 }
 
-/* Nền gradient toàn trang */
+/* Headings use Bungee font */
+h1, h2, h3, .stHeader, .homepage h1, .team-title {
+    font-family: 'Bungee', sans-serif !important;
+}
+
+/* ========== BACKGROUND STYLES ========== */
+/* Sidebar gradient */
+[data-testid=stSidebar] {
+  background-image: linear-gradient(#ebe5d4, #e6c3bc);
+}
+
+/* App background with soft radial gradient */
 [data-testid="stAppViewContainer"] {
-   background: 
+   background:
       radial-gradient(at top right, #e6c3bc, transparent 70%),
       radial-gradient(at bottom left, #efd0b0, transparent 70%),
       #ebe5d4;
 }
 
-/* === ĐỔI MÀU THANH HEADER === */
+/* Header background */
 header[data-testid="stHeader"] {
-    background-color: 		#ebe5d4
-  }
+    background-color: #ebe5d4;
+}
 
+/* ========== TEXT + UI STYLES ========== */
+
+/* Main page title */
+.main-title {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Section subtitles (e.g., Introduction, Overview) */
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Paragraph text for explanations */
+.intro-text {
+    font-size: 17px;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Section headers in orange (for categories) */
+.orange-title {
+    color: #cf5a2e;
+    font-size: 24px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* List style inside tabs (e.g., variable explanations) */
+.variable-list {
+    font-size: 15px;
+    margin-left: 1.5rem;
+    line-height: 1.6;
+}
