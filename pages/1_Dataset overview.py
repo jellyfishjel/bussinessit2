@@ -78,7 +78,7 @@ with tab3:
     # 1. Student Info
     st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #cf5a2e;'>1. Student Information</h3>
-        <ul style="margin-left: 20px; font-family: Inter, sans-serif; font-size: 16px;">
+        <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Student_ID</code>: Unique identifier for each student</li>
             <li><code>Age</code>: Age of student (18–30)</li>
             <li><code>Gender</code>: Male, Female, or Others</li>
@@ -93,7 +93,7 @@ with tab3:
     # 2. Academic Performance
     st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #cf5a2e;'>2. Academic Performance</h3>
-        <ul style="margin-left: 20px; font-family: Inter, sans-serif; font-size: 16px;">
+        <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Internships_Completed</code>: Number of internships (0–4)</li>
             <li><code>Projects_Completed</code>: Academic/personal projects (0–9)</li>
             <li><code>Certifications</code>: Certifications earned (0–5)</li>
@@ -105,7 +105,7 @@ with tab3:
     # 3. Career Outcomes
     st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #cf5a2e;'>3. Career Outcomes</h3>
-        <ul style="margin-left: 20px; font-family: Inter, sans-serif; font-size: 16px;">
+        <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Job_Offers</code>: Number of job offers after graduation (0–5)</li>
             <li><code>Starting_Salary</code>: First salary (USD $25,000–$150,000)</li>
         </ul>
