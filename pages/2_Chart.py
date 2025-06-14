@@ -6,6 +6,11 @@ from scipy.stats import gaussian_kde
 import numpy as np
 
 st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+
+local_css("style/style.css")
 
 @st.cache_data
 def load_data():
@@ -13,11 +18,6 @@ def load_data():
 
 df = load_data()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-
-local_css("style/style.css")
 
 # Sidebar Filters
 st.sidebar.title("Global Filters")
