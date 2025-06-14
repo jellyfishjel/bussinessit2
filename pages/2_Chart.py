@@ -16,7 +16,7 @@ st.markdown("""
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif !important;
-        color: #222;
+        color: #52504d;
         font-size: 15px;
     }
 
