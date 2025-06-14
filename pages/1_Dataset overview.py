@@ -1,33 +1,30 @@
 import pandas as pd
 import streamlit as st
 
-# ==== Page Config ====
-st.set_page_config(
-    page_title="Education Career App",
-    layout="wide"
-)
-
-# ==== Load Dataset ====
+# Load dataset
 @st.cache_data
 def load_data():
     return pd.read_excel("education_career_success.xlsx")
 
 df = load_data()
 
-# ==== Load custom CSS ====
+# Page config
+st.set_page_config(page_title="Education & Career Success", layout="wide")
+
+# Load custom CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("style/style.css")
 
-# ==== Import Inter font ====
+# Import fonts
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# ==== Create Tabs ====
-tab1, tab2, tab3 = st.tabs(["\U0001F4CC Introduction", "\U0001F4C2 Dataset Overview", "\U0001F4CA Variable Explanation"])
+# Create tab navigation
+tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 Variable Explanation"])
 
 # === TAB 1: INTRODUCTION ===
 with tab1:
@@ -55,36 +52,44 @@ with tab1:
 
 # === TAB 2: DATASET OVERVIEW ===
 with tab2:
-    st.header("\U0001F4C2 Dataset Overview")
+    st.markdown("""
+    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📂 Dataset Overview</h1>
+    """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-    <p>This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.  
+    <p> This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.  
     It includes students' educational backgrounds, skills, and career outcomes.  
     The dataset can be used for:</p>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-        <ul>
-            <li>Predicting job success based on education</li>
-            <li>Identifying key factors influencing salaries</li>
-            <li>Understanding the role of networking and internships in career growth</li>
-        </ul>
-    </div>
+        <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
+            <ul>
+                <li>Predicting job success based on education</li>
+                <li>Identifying key factors influencing salaries</li>
+                <li>Understanding the role of networking and internships in career growth</li>
+                </ul>
+        </div>
     """, unsafe_allow_html=True)
 
-    st.subheader("Preview of Dataset")
+    st.markdown("""
+    <h2 style='font-family: Inter, sans-serif; color: #cf5a2e;'>Preview of Dataset</h2>
+    """, unsafe_allow_html=True)
     st.dataframe(df.head())
 
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
-    st.header("\U0001F4CA Variable Explanation")
-
-    # Section 1
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem;'>1. Student Information</h3>
-    <div style='font-family: Inter, sans-serif; font-size: 15px;'>
+    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📊 Variable Explanation</h1>
+    """, unsafe_allow_html=True)
+
+    # Section 1: Student Information
+    st.markdown("""
+    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>1. Student Information</h3>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Student_ID</code>: Order number to identify each student</li>
             <li><code>Age</code>: Age of student (18–30 years old)</li>
@@ -98,10 +103,12 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # Section 2
+    # Section 2: Academic Performance
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem;'>2. Academic Performance</h3>
-    <div style='font-family: Inter, sans-serif; font-size: 15px;'>
+    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>2. Academic Performance</h3>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Internships_Completed</code>: Number of internships (0–4)</li>
             <li><code>Projects_Completed</code>: Number of academic/personal projects (0–9)</li>
@@ -112,10 +119,12 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # Section 3
+    # Section 3: Career Outcomes
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem;'>3. Career Outcomes</h3>
-    <div style='font-family: Inter, sans-serif; font-size: 15px;'>
+    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>3. Career Outcomes</h3>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Job_Offers</code>: Number of job offers post-graduation (0–5)</li>
             <li><code>Starting_Salary</code>: First job salary in USD ($25,000–$150,000)</li>
