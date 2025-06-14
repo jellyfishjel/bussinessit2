@@ -62,15 +62,6 @@ st.markdown("""
      </style>
 """, unsafe_allow_html=True)
 
-
-# ==== HOMEPAGE section ====
-st.markdown("""
-    <div class="homepage">
-        <h1>EDUCATION<br>CAREER<br>SUCCESS</h1>
-        <a href="#team"><button>Read the report</button></a>
-    </div>
-""", unsafe_allow_html=True)
-
 # ==== OUR TEAM section ====
 st.markdown('<a name="team"></a>', unsafe_allow_html=True)
 st.markdown('<div class="team-title">OUR TEAM</div>', unsafe_allow_html=True)
