@@ -26,7 +26,7 @@ with tab1:
     st.header("📌 Introduction")
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-    <p>The <b>“Education Career Success”<b> dataset provides valuable insights into the relationship
+    <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship
     between academic background, career progression, and financial outcomes. By delving into various
     categories of this dataset, we can uncover valuable insights into how different fields of study,
     academic performance, and practical experiences impact career satisfaction, work-life balance, and
