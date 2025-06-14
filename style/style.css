@@ -1,7 +1,8 @@
 /* ====== BACKGROUND STYLES ====== */
 /* Sidebar gradient */
 [data-testid=stSidebar] {
-  background-image: linear-gradient(#e6c3bc, #ebe5d4);
+  background: radial-gradient(at top left, #e6c3bc, transparent 70%),
+       #ebe5d4;
 }
 
 /* App background gradient */
