@@ -74,9 +74,7 @@ with tab3:
     st.header("📊 Variable Explanation")
 
     # Section 1: Student Information
-    st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>1. Student Information</h3>
-    """, unsafe_allow_html=True)
+    st.subheader("1. Student Information")
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
