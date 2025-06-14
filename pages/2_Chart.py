@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -14,33 +13,58 @@ def load_data():
 
 df = load_data()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-
-local_css("style/style.css")
-
-# Sidebar Filters
+# === SIDEBAR ===
 st.sidebar.title("Global Filters")
 
-# Gender Filter - Multiselect
+# Reset Button: Gắn vào một flag để xử lý riêng
+if st.sidebar.button("🔄 Reset Filters"):
+    st.session_state.reset_filters = True
+else:
+    st.session_state.reset_filters = False
+
+# GENDER
 gender_options = ['All'] + sorted(df['Gender'].dropna().unique())
-selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, default=['All'])
-if 'All' not in selected_genders:
-    df = df[df['Gender'].isin(selected_genders)]
+default_gender = ['All'] if st.session_state.get('reset_filters', False) else st.session_state.get('selected_genders', ['All'])
+selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, default=default_gender)
 
-# Job Level Filter
+# Logic xử lý lọc ngay
+if 'All' in selected_genders:
+    genders_filtered = df['Gender'].unique()  # Chọn tất cả nếu All được chọn
+elif selected_genders:
+    genders_filtered = selected_genders
+else:
+    selected_genders = ['All']
+    genders_filtered = df['Gender'].unique()
+
+st.session_state['selected_genders'] = selected_genders
+df = df[df['Gender'].isin(genders_filtered)]
+
+# JOB LEVEL
 job_levels = sorted(df['Current_Job_Level'].dropna().unique())
-selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
+default_level = job_levels[0] if st.session_state.get('reset_filters', False) else st.session_state.get("selected_level", job_levels[0])
+selected_level = st.sidebar.selectbox("Select Job Level", job_levels, index=job_levels.index(default_level))
+st.session_state["selected_level"] = selected_level
 
-# Age Filter
+# AGE RANGE
 min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
-age_range = st.sidebar.slider("Select Age Range", min_value=min_age, max_value=max_age, value=(min_age, max_age))
+default_age_range = (min_age, max_age) if st.session_state.get('reset_filters', False) else st.session_state.get("age_range", (min_age, max_age))
+age_range = st.sidebar.slider("Select Age Range", min_value=min_age, max_value=max_age, value=default_age_range)
+st.session_state["age_range"] = age_range
 
-# Entrepreneurship Status Filter - Individual Checkboxes
+# ENTREPRENEURSHIP CHECKBOX
 st.sidebar.markdown("**Select Entrepreneurship Status**")
-show_yes = st.sidebar.checkbox("Yes", value=True)
-show_no = st.sidebar.checkbox("No", value=True)
+default_yes = True if st.session_state.get('reset_filters', False) else st.session_state.get("show_yes", True)
+default_no = True if st.session_state.get('reset_filters', False) else st.session_state.get("show_no", True)
+
+show_yes = st.sidebar.checkbox("Yes", value=default_yes)
+show_no = st.sidebar.checkbox("No", value=default_no)
+
+# Auto tick lại cả 2 nếu không chọn gì
+if not show_yes and not show_no:
+    show_yes, show_no = True, True
+
+st.session_state["show_yes"] = show_yes
+st.session_state["show_no"] = show_no
 
 selected_statuses = []
 if show_yes:
@@ -48,30 +72,26 @@ if show_yes:
 if show_no:
     selected_statuses.append("No")
 
-if not selected_statuses:
-    selected_statuses = ['Yes', 'No']
-
 color_map = {'Yes': '#FFD700', 'No': '#004080'}
 
-# Main Tabs
+# === TABS ===
 graph_tab = st.tabs(["📊 Age & Job Offers", "📈 Age & Demographics"])
 
 # === TAB 1 ===
 with graph_tab[0]:
     st.title("Entrepreneurship and Job Offers by Age")
 
-    # Filtered data
-    df_filtered = df[(df['Current_Job_Level'] == selected_level) &
-                     (df['Age'].between(age_range[0], age_range[1])) &
-                     (df['Entrepreneurship'].isin(selected_statuses))]
+    df_filtered = df[
+        (df['Current_Job_Level'] == selected_level) &
+        (df['Age'].between(age_range[0], age_range[1])) &
+        (df['Entrepreneurship'].isin(selected_statuses))
+    ]
 
-    # Key Indicators - TAB 1
     k1, k2, k3 = st.columns(3)
     with k1:
         st.metric("Total Records", len(df_filtered))
     with k2:
-        median_age = df_filtered['Age'].median()
-        st.metric("Median Age", f"{median_age:.1f}")
+        st.metric("Median Age", f"{df_filtered['Age'].median():.1f}")
     with k3:
         entre_percent = (df_filtered['Entrepreneurship'] == "Yes").mean() * 100
         st.metric("Entrepreneurs (%)", f"{entre_percent:.1f}%")
@@ -183,8 +203,9 @@ with graph_tab[1]:
                  (df['Age'].between(age_range[0], age_range[1])) &
                  (df['Entrepreneurship'].isin(selected_statuses))]
 
-    # Key Indicators - TAB 2 (Dynamic)
-    if not df_demo.empty:
+    if df_demo.empty:
+        st.warning("Not enough data to display charts.")
+    else:
         k1, k2, k3 = st.columns(3)
         with k1:
             st.metric("Total Records", len(df_demo))
@@ -202,10 +223,8 @@ with graph_tab[1]:
                 top_field = df_demo['Field_of_Study'].mode().iloc[0] if not df_demo['Field_of_Study'].mode().empty else "N/A"
                 st.metric("Most Common Field", top_field)
 
-    else:
-        st.warning("Not enough data to display charts.")
-        
-        # Density Area Chart
+        col1, col2 = st.columns(2)
+
         with col1:
             fig_density = go.Figure()
             group_col = 'Gender' if chart_option == 'Gender' else 'Field_of_Study'
@@ -236,7 +255,6 @@ with graph_tab[1]:
             )
             st.plotly_chart(fig_density, use_container_width=True)
 
-        # Donut Chart
         with col2:
             if chart_option == 'Gender':
                 counts = df_demo['Gender'].value_counts().reset_index()
