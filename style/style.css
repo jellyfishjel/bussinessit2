@@ -2,7 +2,7 @@
 /* Sidebar gradient */
 [data-testid=stSidebar] {
   background: radial-gradient(at top left, #e6c3bc, transparent 70%),
-       #efd0b0;
+       #ebd9c4;
 }
 
 /* App background gradient */
