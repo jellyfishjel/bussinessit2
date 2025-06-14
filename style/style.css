@@ -1,11 +1,3 @@
-/* ====== GOOGLE FONTS ====== */
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
-
-/* ====== GLOBAL FONT ====== */
-html, body, div, p, span, stMarkdown, li, ul, table {
-    font-family: 'Inter', sans-serif;
-}
-
 /* ====== BACKGROUND STYLES ====== */
 /* Sidebar gradient */
 [data-testid=stSidebar] {
@@ -25,62 +17,7 @@ header[data-testid="stHeader"] {
     background-color: #ebe5d4;
 }
 
-/* ====== HOMEPAGE ELEMENTS ====== */
 
-/* Title on homepage using Bungee */
-h1.bungee-title, .main-banner, .our-team {
-    font-family: 'Bungee', sans-serif !important;
-    color: #cf5a2e;
-    text-align: center;
-}
-
-/* Optional class if reused */
-.our-team {
-    font-size: 36px;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    color: black;
-}
-
-/* ==== TEAM NAME TEXT ==== */
-.team-name {
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    color: black;
-}
-
-/* ====== INTRODUCTION TABS & SECTION HEADINGS ====== */
-
-.main-title {
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.intro-text {
-    font-size: 17px;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #222;
-}
-
-.orange-title {
-    color: #cf5a2e;
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.variable-list {
-    font-size: 15px;
-    margin-left: 1.5rem;
-    line-height: 1.6;
-    color: #444;
-}
 
 /* ==== FADE-IN ANIMATION ==== */
 @keyframes fadeInUp {
