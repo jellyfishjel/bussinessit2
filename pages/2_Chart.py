@@ -208,14 +208,31 @@ job_level_notes = {
     <ul style="margin: 0; padding-left: 20px;">
         <li>Majority of individuals across all ages do not pursue entrepreneurship.</li>
         <li>A slight increase in entrepreneurial interest is seen between ages 21–23.</li>
-        <li>After age 23, the entrepreneurship rate stabilizes with minor fluctuations.</li>
-        <li>Age appears to have limited influence on entrepreneurship decisions in entry-level groups.</li>
     </ul>
     """,
-    "Mid": "<ul><li>Custom note for Mid level here...</li></ul>",
-    "Senior": "<ul><li>Custom note for Senior level here...</li></ul>",
-    "Manager": "<ul><li>Custom note for Manager level here...</li></ul>",
-    "Executive": "<ul><li>Custom note for Executive level here...</li></ul>"
+    "Mid": """
+    <ul style="margin: 0; padding-left: 20px;">
+        <li>Entrepreneurship participation remains relatively steady, with slight increases around age 21–23.</li>
+        <li>Majority still fall under the non-entrepreneurship group across all ages.</li>
+    </ul>
+    """,
+    "Senior": """
+    <ul style="margin: 0; padding-left: 20px;">
+        <li>A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).</li>
+        <li>Proportion of entrepreneurs is more prominent than in mid and entry levels.</li>
+    </ul>
+    """,
+    "Manager": """
+    <ul style="margin: 0; padding-left: 20px;">
+        <li>No specific note provided yet.</li>
+    </ul>
+    """,
+    "Executive": """
+    <ul style="margin: 0; padding-left: 20px;">
+        <li>Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.</li>
+        <li>Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.</li>
+    </ul>
+    """
 }
 
 job_offers_notes = {
