@@ -14,7 +14,8 @@
 
 /* Header background */
 header[data-testid="stHeader"] {
-    background-color: #ebe5d4;
+      radial-gradient(at bottom right, #efd0b0, transparent 70%),
+      #ebe5d4;
 }
 
 
