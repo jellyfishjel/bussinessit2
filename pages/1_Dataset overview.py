@@ -31,7 +31,9 @@ tab1, tab2, tab3 = st.tabs(["\U0001F4CC Introduction", "\U0001F4C2 Dataset Overv
 
 # === TAB 1: INTRODUCTION ===
 with tab1:
-    st.header("\U0001F4CC Introduction")
+    st.markdown("""
+    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📌 Introduction</h1>
+    """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
     <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship
