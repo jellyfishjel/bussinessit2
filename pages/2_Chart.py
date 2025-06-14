@@ -348,11 +348,25 @@ with graph_tab[1]:
             st.plotly_chart(fig_bar, use_container_width=True)
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
-        # Display note box based on selected Job Level
+        # Display a more stylish note box
         note = job_level_notes.get(selected_level, "No specific notes available for this level.")
         st.markdown(f"""
-        <div style="border: 1px dashed #cf5a2e; border-radius: 10px; padding: 15px; background-color: #fff6f2; margin-top: 30px;">
-            <strong>Note:</strong> {note}
+        <div style="
+            background-color: #fff4ec;
+            border-left: 6px solid #cf5a2e;
+            padding: 18px 22px;
+            margin-top: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            font-family: 'Segoe UI', sans-serif;
+        ">
+            <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+                📌 Note for <span style="text-transform: capitalize;">{selected_level}</span> Level
+            </div>
+            <div style="font-size: 15px; color: #444;">
+                {note}
+            </div>
         </div>
         """, unsafe_allow_html=True)
+
 
