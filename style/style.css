@@ -32,7 +32,10 @@ html, body, div, p, span {
     font-family: 'Inter', sans-serif;
 }
 
-/* Keep Bungee for main headings */
-h1, h2, h3, .stHeader, .stMarkdown h1, .stMarkdown h2, .homepage h1, .team-title {
+/* Apply Bungee to all h1–h3, markdown headers, and st header class */
+h1, h2, h3,
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
+.block-container h1, .block-container h2, .block-container h3,
+[data-testid="stHeader"] h1, [data-testid="stHeader"] h2, [data-testid="stHeader"] h3 {
     font-family: 'Bungee', sans-serif !important;
 }
