@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
 
 /* ========== GLOBAL FONTS ========== */
-html, body, div, p, span, stMarkdown {
+html, body, div, p, span, stMarkdown, h1, h2, h3 {
     font-family: 'Inter', sans-serif;
 }
 
 /* Headings use Bungee font */
-h1, h2, h3, .stHeader, .homepage h1, .team-title {
+.stHeader, .homepage h1, .team-title {
     font-family: 'Bungee', sans-serif !important;
 }
 
