@@ -110,7 +110,7 @@ with graph_tab[0]:
     else:
         if chart_option == 'Gender Distribution':
             with st.container():
-                st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
                     <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
                         <div>
                             <div style="font-size: 14px; color: #555;">Total Records</div>
@@ -133,7 +133,7 @@ with graph_tab[0]:
             top_fields = df_demo['Field_of_Study'].value_counts().head(3).index.tolist()
             display_fields = ", ".join(top_fields) if top_fields else "N/A"
             with st.container():
-                st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
                     <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
                         <div>
                             <div style="font-size: 14px; color: #555;">Total Records</div>
@@ -220,7 +220,7 @@ with graph_tab[1]:
         st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
     else:
         with st.container():
-            st.markdown("""<div style="border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-top: 10px; margin-bottom: 30px;">
+            st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
                 <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
                     <div>
                         <div style="font-size: 14px; color: #555;">Total Records</div>
