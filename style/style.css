@@ -26,7 +26,7 @@ header[data-testid="stHeader"] {
     animation: fadeIn 2s ease-out;
 }
 
-
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
 /* ===== Use Inter font for all text ===== */
 html, body, div, p, span {
     font-family: 'Inter', sans-serif;
