@@ -30,7 +30,7 @@ with tab1:
             academic performance, and practical experiences impact career satisfaction, work-life balance, and
             long-term professional achievements.</p>
 
-            <p>This report is our project for R for Data Science course. The report contains plots that are created
+            <p>This report is our project for <i>R for Data Science</i> course. The report contains plots that are created
             by using RStudio to visualize information from the dataset in a more accessible way. Each diagram
             is followed by a detailed description and code from RStudio to provide readers with clear
             explanation on statistical data and how RStudio is used in practical data analysis.</p>
