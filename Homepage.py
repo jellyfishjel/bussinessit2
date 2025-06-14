@@ -7,84 +7,62 @@ st.set_page_config(
     layout="wide"
 )
 
-# ==== Global Style ====
+# ==== Apply global styles (Inter font + sidebar color) ====
 from utils import apply_global_styles
 apply_global_styles()
 
 def local_css(file_name):
     with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
 local_css("style/style.css")
 
-# ==== Font & Animation CSS ====
+# ==== Import Google Fonts + Fade-in CSS ====
 st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Bungee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
     <style>
-        .fade-in { animation: fadeIn 1.5s ease-in; }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
         @keyframes fadeIn {
             0% {opacity: 0;}
             100% {opacity: 1;}
         }
-        .hero-box {
-            background: rgba(255,255,255,0.8);
-            padding: 40px 30px;
-            border-radius: 20px;
-            display: inline-block;
-            max-width: 900px;
-        }
     </style>
 """, unsafe_allow_html=True)
 
-# ==== HERO Section ====
+# ==== HEADER ====
 st.markdown("""
-<div class="fade-in" style='text-align: center; margin-top: -30px;'>
-    <div class="hero-box">
-        <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; margin-bottom: 10px;'>
-            🎓 EDUCATION · 💼 CAREER · 🏆 SUCCESS
+    <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
+        <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
+            EDUCATION<br>CAREER<br>SUCCESS
         </h1>
-        <p style="font-family: 'Inter', sans-serif; font-size: 22px; color: #cf5a2e; font-weight: 600;">
-            Turning educational data into career insight.
-        </p>
-        <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #333; margin-top: 25px;">
-            This interactive platform analyzes how education level, field of study, gender, and location 
-            impact career outcomes. Our goal is to help you explore data-driven insights into career success, 
-            based on real global statistics.
-        </p>
-        <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: #555;">
-            Built using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> 
-            as part of the <b>Python Project 2</b> for the <b>Business IT 2</b> course at 
-            <b>Vietnamese–German University</b>.
-        </p>
     </div>
-</div>
 """, unsafe_allow_html=True)
 
-# ==== CTA Button ====
-st.markdown("<br>", unsafe_allow_html=True)
+# ==== SLOGAN ====
 st.markdown("""
-<div style="text-align: center;">
-    <a href="/" style="text-decoration: none;">
-        <button style="
-            background-color: #cf5a2e;
-            color: white;
-            font-size: 18px;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        ">
-            🚀 Explore the Dashboard
-        </button>
-    </a>
-</div>
+ <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
+    <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
+        Insight into success, powered by data.
+    </p>
+    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
+        Discover how different factors shape career paths—through interactive analytics.
+    </p>
+    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
+        Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
+    </p>
+ </div>
 """, unsafe_allow_html=True)
 
-# ==== OUR TEAM ====
-st.markdown("<br><br><div style='text-align: center; font-size: 36px; font-family: \"Bungee\", sans-serif; color: black;'>OUR TEAM</div><br>", unsafe_allow_html=True)
+# ==== OUR TEAM Title ====
+st.markdown("""
+    <div style='text-align: center; font-size: 36px; font-family: "Bungee", sans-serif; color: black; margin-top: 1rem; margin-bottom: 2rem;'>
+        OUR TEAM
+    </div>
+""", unsafe_allow_html=True)
 
-# ==== Member Data ====
+# ==== TEAM MEMBERS ====
 team_members = [
     {"name": "Nguyễn Kiều Anh", "image": "image/Nguyen Kieu Anh.png"},
     {"name": "Lê Nguyễn Khánh Phương", "image": "image/Le Nguyen Khanh Phuong.png"},
@@ -95,18 +73,24 @@ team_members = [
     {"name": "Nguyễn Bội Ngọc", "image": "image/Nguyen Boi Ngoc.png"},
 ]
 
-# ==== Show Team Grid ====
-def show_member_grid(members, n_cols=4):
-    for i in range(0, len(members), n_cols):
-        row = members[i:i+n_cols]
-        cols = st.columns(len(row))
-        for col, member in zip(cols, row):
-            with col:
-                st.image(member["image"], width=200)
-                st.markdown(
-                    f"<div style='text-align:center; font-family: Inter; font-size:15px; font-weight:600; color:#222'>{member['name']}</div>",
-                    unsafe_allow_html=True
-                )
-
-show_member_grid(team_members)
-
+# ==== Top row ====
+top_row = team_members[:4]
+cols_top = st.columns(len(top_row))
+for col, member in zip(cols_top, top_row):
+    with col:
+        st.image(member["image"], width=250)
+        st.markdown(
+            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
+            unsafe_allow_html=True
+        )
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+# ==== Bottom row ====
+bottom_row = team_members[4:]
+cols_bot = st.columns([1, 3, 3, 3, 1])  # center 3 members
+for i, member in enumerate(bottom_row):
+    with cols_bot[i + 1]:
+        st.image(member["image"], width=300)
+        st.markdown(
+            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
+            unsafe_allow_html=True
+        )
