@@ -48,9 +48,11 @@ with tab1:
 with tab2:
     st.header("📂 Dataset Overview")
     st.markdown("""
-    This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.  
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
+    <p> This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.  
     It includes students' educational backgrounds, skills, and career outcomes.  
-    The dataset can be used for:
+    The dataset can be used for:</p>
+    </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
