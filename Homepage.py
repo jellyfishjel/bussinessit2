@@ -29,7 +29,7 @@ st.markdown("""
 
 # ==== SLOGAN ====
 st.markdown("""
- <div style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
+ <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
     <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
         Insight into success, powered by data.
     </p>
