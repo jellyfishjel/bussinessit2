@@ -74,9 +74,11 @@ with tab3:
     st.header("📊 Variable Explanation")
 
     # Section 1: Student Information
-    st.subheader("1. Student Information")
     st.markdown("""
-    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+    <h3 style='font-family: Inter, sans-serif; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>1. Student Information</h3>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Student_ID</code>: Order number to identify each student</li>
             <li><code>Age</code>: Age of student (18–30 years old)</li>
@@ -93,7 +95,7 @@ with tab3:
     # Section 2: Academic Performance
     st.subheader("2. Academic Performance")
     st.markdown("""
-    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Internships_Completed</code>: Number of internships (0–4)</li>
             <li><code>Projects_Completed</code>: Number of academic/personal projects (0–9)</li>
@@ -107,7 +109,7 @@ with tab3:
     # Section 3: Career Outcomes
     st.subheader("3. Career Outcomes")
     st.markdown("""
-    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+    <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
         <ul>
             <li><code>Job_Offers</code>: Number of job offers post-graduation (0–5)</li>
             <li><code>Starting_Salary</code>: First job salary in USD ($25,000–$150,000)</li>
