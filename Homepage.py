@@ -33,6 +33,7 @@ st.markdown("""
             align-items: center;
             text-align: center;
             padding: 5px 20px 30px;
+            margin-top: -60px;
         }
 
         .homepage h1 {
