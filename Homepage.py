@@ -46,10 +46,10 @@ st.markdown("""
     <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
         Insight into success, powered by data.
     </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #444;">
+    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
         Discover how different factors shape career paths—through interactive analytics.
     </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333;">
+    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
         Developed using <b>Python, Github, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
     </p>
  </div>
