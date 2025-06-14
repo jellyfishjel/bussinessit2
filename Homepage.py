@@ -7,15 +7,18 @@ st.set_page_config(
     layout="wide"
 )
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-
-local_css("style/style.css")
-
-# ==== Import Google Fonts ====
+# ==== Import Google Fonts + Fade-in CSS ====
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+        @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 # ==== HEADER ====
