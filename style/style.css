@@ -1,10 +1,8 @@
-/* ====== BACKGROUND STYLES ====== */
 /* Sidebar gradient */
 [data-testid=stSidebar] {
   background: radial-gradient(at top left, #e6c3bc, transparent 50%),
        #ebd9c4;
 }
-
 /* App background gradient */
 [data-testid="stAppViewContainer"] {
    background:
@@ -12,15 +10,11 @@
       radial-gradient(at bottom left, #efd0b0, transparent 70%),
       #ebe5d4;
 }
-
 /* Header background */
 header[data-testid="stHeader"] {
      background: radial-gradient(at bottom right, #e6c3bc, transparent 70%),
                 #ebe5d4;
 }
-
-
-
 /* ==== FADE-IN ANIMATION ==== */
 @keyframes fadeInUp {
   0% {
