@@ -1,0 +1,18 @@
+/* Sidebar - gradient and clean look */
+/* Change the sidebar color*/
+[data-testid=stSidebar] {
+  background-image: linear-gradient(#ebe5d4,#e6c3bc);
+}
+
+/* Nền gradient toàn trang */
+[data-testid="stAppViewContainer"] {
+   background: 
+      radial-gradient(at top right, #e6c3bc, transparent 70%),
+      radial-gradient(at bottom left, #efd0b0, transparent 70%),
+      #ebe5d4;
+}
+
+/* === ĐỔI MÀU THANH HEADER === */
+header[data-testid="stHeader"] {
+    background-color: 		#ebe5d4
+  }
