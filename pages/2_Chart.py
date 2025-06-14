@@ -6,6 +6,20 @@ from scipy.stats import gaussian_kde
 import numpy as np
 
 st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Inter', sans-serif !important;
+        color: #222222;
+        font-size: 15px;
+    }
+    .sidebar .sidebar-content {
+        font-family: 'Inter', sans-serif !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 def local_css(file_name):
     with open(file_name) as f:
