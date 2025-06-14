@@ -16,3 +16,23 @@
 header[data-testid="stHeader"] {
     background-color: 		#ebe5d4
   }
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 2s ease-out;
+}
+
+/* ===== Use Inter font for all text ===== */
+html, body, div, p, span {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ===== Keep Bungee for headers only ===== */
+.homepage h1,
+.team-title {
+    font-family: 'Bungee', sans-serif !important;
+}
