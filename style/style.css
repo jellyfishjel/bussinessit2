@@ -26,13 +26,13 @@ header[data-testid="stHeader"] {
     animation: fadeIn 2s ease-out;
 }
 
-/* ===== Use Inter font for all text ===== */
-html, body, div, p, span {
+
+/* Set Inter as the default font */
+html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
 }
 
-/* ===== Keep Bungee for headers only ===== */
-.homepage h1,
-.team-title {
+/* Keep Bungee for main headings */
+h1, h2, h3, .stHeader, .stMarkdown h1, .stMarkdown h2, .homepage h1, .team-title {
     font-family: 'Bungee', sans-serif !important;
 }
