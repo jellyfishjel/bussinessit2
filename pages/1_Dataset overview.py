@@ -25,11 +25,13 @@ tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 
 with tab1:
     st.header("📌 Introduction")
     st.markdown("""
-    The “Education and Career Success” dataset provides valuable insights into the relationship
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
+    <p>The “Education and Career Success” dataset provides valuable insights into the relationship
     between academic background, career progression, and financial outcomes. By delving into various
     categories of this dataset, we can uncover valuable insights into how different fields of study,
     academic performance, and practical experiences impact career satisfaction, work-life balance, and
-    long-term professional achievements.
+    long-term professional achievements.</p>
+    </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
