@@ -6,6 +6,10 @@ from scipy.stats import gaussian_kde
 import numpy as np
 
 st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+
+from utils import apply_global_styles
+apply_global_styles()
+
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
