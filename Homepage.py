@@ -49,7 +49,7 @@ st.markdown("""
             font-size: 36px;
             font-family: 'Bungee', sans-serif;
             color: black;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             margin-top: 3rem;
         }
      </style>
