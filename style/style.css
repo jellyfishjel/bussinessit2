@@ -17,15 +17,6 @@ header[data-testid="stHeader"] {
     background-color: 		#ebe5d4
   }
 
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 1.3s ease-out;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
 
 /* Inter for all body text */
