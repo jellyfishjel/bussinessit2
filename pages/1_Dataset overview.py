@@ -74,7 +74,7 @@ with tab2:
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <h2 style='font-family: Inter, sans-serif; color: #cf5a2e;'>Preview of Dataset</h2>
+    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e;'>Preview of Dataset</h2>
     """, unsafe_allow_html=True)
     st.dataframe(df.head())
 
