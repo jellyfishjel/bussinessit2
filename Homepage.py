@@ -7,6 +7,12 @@ st.set_page_config(
     layout="wide"
 )
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+
+local_css("style/style.css")
+
 # ==== Import Google Fonts ====
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
