@@ -23,7 +23,7 @@ header[data-testid="stHeader"] {
 }
 
 .fade-in {
-    animation: fadeIn 2s ease-out;
+    animation: fadeIn 1.3s ease-out;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap');
