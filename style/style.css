@@ -37,11 +37,11 @@ html, body, div, p, span {
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=Bungee&display=swap');
 
 /* Use Inter font for all text */
-html, body, div, p, span {
+html, body, div, p, span, stMarkdown {
     font-family: 'Inter', sans-serif;
 }
 
 /* Keep Bungee for main headings */
-h1, h2, h3, .stHeader, .stMarkdown h1, .stMarkdown h2, .homepage h1, .team-title {
+h1, h2, h3, .stHeader, .homepage h1, .team-title {
     font-family: 'Bungee', sans-serif !important;
 }
