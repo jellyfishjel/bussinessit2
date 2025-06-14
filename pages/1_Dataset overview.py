@@ -73,29 +73,44 @@ with tab2:
 with tab3:
     st.header("📊 Variable Explanation")
 
+    # Section 1: Student Information
     st.subheader("1. Student Information")
     st.markdown("""
-    - `Student_ID`: Order number to identify each student  
-    - `Age`: Age of student (18–30 years old)  
-    - `Gender`: Male, Female, or Others  
-    - `High_School_GPA`: GPA in high school (2.0–4.0 scale)  
-    - `SAT_score`: Standardized SAT test score (900–1600)  
-    - `University_Ranking`: Rank of the university attended (1–1000)  
-    - `University_GPA`: GPA in university (2.0–4.0 scale)  
-    - `Field_of_Study`: Student’s major (Arts, Law, Business, Medicine, CS, Engineering, Math)
-    """)
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+        <ul>
+            <li><code>Student_ID</code>: Order number to identify each student</li>
+            <li><code>Age</code>: Age of student (18–30 years old)</li>
+            <li><code>Gender</code>: Male, Female, or Others</li>
+            <li><code>High_School_GPA</code>: GPA in high school (2.0–4.0 scale)</li>
+            <li><code>SAT_score</code>: Standardized SAT test score (900–1600)</li>
+            <li><code>University_Ranking</code>: Rank of the university attended (1–1000)</li>
+            <li><code>University_GPA</code>: GPA in university (2.0–4.0 scale)</li>
+            <li><code>Field_of_Study</code>: Student’s major (Arts, Law, Business, Medicine, CS, Engineering, Math)</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
+    # Section 2: Academic Performance
     st.subheader("2. Academic Performance")
     st.markdown("""
-    - `Internships_Completed`: Number of internships (0–4)  
-    - `Projects_Completed`: Number of academic/personal projects (0–9)  
-    - `Certifications`: Number of additional certifications earned (0–5)  
-    - `Soft_Skills_Score`: Soft skills rating (1–10)  
-    - `Networking_Score`: Networking and connections score (1–10)
-    """)
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+        <ul>
+            <li><code>Internships_Completed</code>: Number of internships (0–4)</li>
+            <li><code>Projects_Completed</code>: Number of academic/personal projects (0–9)</li>
+            <li><code>Certifications</code>: Number of additional certifications earned (0–5)</li>
+            <li><code>Soft_Skills_Score</code>: Soft skills rating (1–10)</li>
+            <li><code>Networking_Score</code>: Networking and connections score (1–10)</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
+    # Section 3: Career Outcomes
     st.subheader("3. Career Outcomes")
     st.markdown("""
-    - `Job_Offers`: Number of job offers post-graduation (0–5)  
-    - `Starting_Salary`: First job salary in USD ($25,000–$150,000)
-    """)
+    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-bottom: 1rem;'>
+        <ul>
+            <li><code>Job_Offers</code>: Number of job offers post-graduation (0–5)</li>
+            <li><code>Starting_Salary</code>: First job salary in USD ($25,000–$150,000)</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
