@@ -29,7 +29,7 @@ tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 
 # === TAB 1: INTRODUCTION ===
 with tab1:
     st.markdown("""
-    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📌 Introduction</h1>
+    <h1 style='font-family: Inter, sans-serif; font-size: 30px; color: #cf5a2e;'>📌 Introduction</h1>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
@@ -53,7 +53,7 @@ with tab1:
 # === TAB 2: DATASET OVERVIEW ===
 with tab2:
     st.markdown("""
-    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📂 Dataset Overview</h1>
+    <h1 style='font-family: Inter, sans-serif; font-size: 30px; color: #cf5a2e;'>📂 Dataset Overview</h1>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
@@ -81,12 +81,12 @@ with tab2:
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
     st.markdown("""
-    <h1 style='font-family: Inter, sans-serif; font-size: 36px; color: #333;'>📊 Variable Explanation</h1>
+    <h1 style='font-family: Inter, sans-serif; font-size: 30 px; color: #cf5a2e;'>📊 Variable Explanation</h1>
     """, unsafe_allow_html=True)
 
     # Section 1: Student Information
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>1. Student Information</h3>
+    <h3 style='font-family: Inter, sans-serif; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>1. Student Information</h3>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
@@ -105,7 +105,7 @@ with tab3:
 
     # Section 2: Academic Performance
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>2. Academic Performance</h3>
+    <h3 style='font-family: Inter, sans-serif; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>2. Academic Performance</h3>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
@@ -121,7 +121,7 @@ with tab3:
 
     # Section 3: Career Outcomes
     st.markdown("""
-    <h3 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>3. Career Outcomes</h3>
+    <h3 style='font-family: Inter, sans-serif; font-size: 24px; margin-top: 1rem; margin-bottom: 0.5rem;'>3. Career Outcomes</h3>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div style='font-family: Inter, sans-serif; font-size: 15px; margin-bottom: 1rem;'>
