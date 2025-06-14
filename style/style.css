@@ -27,8 +27,8 @@ header[data-testid="stHeader"] {
 }
 
 
-/* Set Inter as the default font */
-html, body, [class*="css"] {
+/* ===== Use Inter font for all text ===== */
+html, body, div, p, span {
     font-family: 'Inter', sans-serif;
 }
 
