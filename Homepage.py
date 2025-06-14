@@ -90,5 +90,5 @@ bottom_row = team_members[4:]
 cols_bot = st.columns([1, 3, 3, 3, 1])  # center 3 members
 for i, member in enumerate(bottom_row):
     with cols_bot[i + 1]:
-        st.image(member["image"], width=250)
+        st.image(member["image"], width=300)
         st.markdown(f"<div style='text-align:center; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>", unsafe_allow_html=True)
