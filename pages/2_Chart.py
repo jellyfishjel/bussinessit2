@@ -14,13 +14,17 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-    html, body, [class*="css"]  {
+    html, body, [class*="css"] {
         font-family: 'Inter', sans-serif !important;
-        color: #222222;
+        color: #222;
         font-size: 15px;
     }
-    .sidebar .sidebar-content {
-        font-family: 'Inter', sans-serif !important;
+
+    .main-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #222;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -89,7 +93,7 @@ graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
 with graph_tab[0]:
-    st.title("Demographics")
+    st.markdown("<h1 class='main-title'> Demographics</h1>", unsafe_allow_html=True)
 
     chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
 
@@ -198,7 +202,8 @@ with graph_tab[0]:
 
 # === TAB 2 (Job Offers) ===
 with graph_tab[1]:
-    st.title("Job Offers")
+    st.markdown("<h1 class='main-title'> Job Offers</h1>", unsafe_allow_html=True)
+
 
     df_filtered = gender_filtered[
         (gender_filtered['Current_Job_Level'] == selected_level) &
