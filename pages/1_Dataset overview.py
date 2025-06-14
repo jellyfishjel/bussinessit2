@@ -40,12 +40,17 @@ with tab1:
 
 # === TAB 2: DATASET OVERVIEW ===
 with tab2:
+    st.markdown("<h1 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 48px;'>📂 Dataset Overview</h1>", unsafe_allow_html=True)
+
     st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 48px;'>📂 Dataset Overview</h1>
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
             <p>This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.
             It includes students’ educational backgrounds, skills, and outcomes.</p>
+        </div>
+    """, unsafe_allow_html=True)
 
+    st.markdown("""
+        <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
             <p>The dataset can be used to:</p>
             <ul style="margin-left: 20px;">
                 <li>Predict job success based on education</li>
