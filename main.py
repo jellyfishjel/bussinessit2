@@ -30,7 +30,7 @@ st.markdown("""
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px 80px;
+            padding: 80px 20px 80px;
         }
 
         .homepage h1 {
@@ -38,17 +38,7 @@ st.markdown("""
             font-size: 64px;
             color: #cf5a2e;
             line-height: 1.2;
-            margin-bottom: 40px;
-        }
-
-        .homepage button {
-            background: linear-gradient(to right, #f6d365, #fda085);
-            color: black;
-            padding: 12px 30px;
-            font-size: 16px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
+            margin-bottom: 20px;
         }
 
         .team-title {
