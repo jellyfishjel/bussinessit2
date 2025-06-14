@@ -3,10 +3,11 @@ from PIL import Image
 
 # ==== Page Config ====
 st.set_page_config(
-    page_title="Education Career App",
+    page_title="Education Career Success",
     layout="wide"
 )
 
+# ==== Apply global styles (Inter font + sidebar color) ====
 from utils import apply_global_styles
 apply_global_styles()
 
