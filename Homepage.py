@@ -19,7 +19,9 @@ local_css("style/style.css")
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
-
+st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
 
 # ==== Global CSS ====
 st.markdown("""
@@ -30,15 +32,15 @@ st.markdown("""
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px 80px;
+            padding: 20px 20px 30px;
         }
 
         .homepage h1 {
             font-family: 'Bungee', sans-serif;
-            font-size: 64px;
+            font-size: 60px;
             color: #cf5a2e;
-            line-height: 1.2;
-            margin-bottom: 10px;
+            line-height: 1.0;
+            margin-bottom: 0px;
         }
 
         .team-title {
@@ -52,12 +54,26 @@ st.markdown("""
      </style>
 """, unsafe_allow_html=True)
 
+
 st.markdown("""
     <div class="homepage">
         <h1>EDUCATION<br>CAREER<br>SUCCESS</h1>
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+ <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
+    <p style="font-size: 25px; color: #cf5a2e; font-weight: bold;">
+        Insight into success, powered by data.
+    </p>
+    <p style="font-size: 18px; color: #444;">
+        Discover how different factors shape career paths—through interactive analytics.
+    </p>
+    <p style="font-size: 17px; color: #666;">
+        Developed using <b>Python, Github, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> as part of the <i>Python Project 2</i> for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
+    </p>
+ </div>
+""", unsafe_allow_html=True)
 # ==== OUR TEAM section ====
 st.markdown('<a name="team"></a>', unsafe_allow_html=True)
 st.markdown('<div class="team-title">OUR TEAM</div>', unsafe_allow_html=True)
