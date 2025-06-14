@@ -296,6 +296,7 @@ with graph_tab[1]:
         fig_line.update_layout(
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
+            title=f"Average Job Offers by Age – {selected_level} Level",
             margin=dict(t=40, l=40, r=40, b=40),
             legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
