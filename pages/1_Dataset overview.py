@@ -22,6 +22,8 @@ tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 
 # === TAB 1: INTRODUCTION ===
 with tab1:
     st.markdown("""
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 48px;'>📌 Introduction</h1>
+        <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
         <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship
         between academic background, career progression, and financial outcomes. By delving into various
         categories of this dataset, we can uncover valuable insights into how different fields of study,
