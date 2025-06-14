@@ -204,11 +204,18 @@ with graph_tab[0]:
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
-    "Entry": "Entry-level individuals often have limited job offers and are exploring entrepreneurial paths.",
-    "Mid": "Mid-level professionals typically receive more offers and may begin considering starting their own ventures.",
-    "Senior": "Senior-level roles see more consistent job offers and may shift focus from entrepreneurship to mentorship or leadership.",
-    "Manager": "Managers show a balanced trend between job stability and entrepreneurial aspirations.",
-    "Executive": "Executives tend to receive fewer job offers but are more likely to engage in entrepreneurship based on strategic vision."
+    "Entry": """
+    <ul style="margin: 0; padding-left: 20px;">
+        <li>Majority of individuals across all ages do not pursue entrepreneurship.</li>
+        <li>A slight increase in entrepreneurial interest is seen between ages 21–23.</li>
+        <li>After age 23, the entrepreneurship rate stabilizes with minor fluctuations.</li>
+        <li>Age appears to have limited influence on entrepreneurship decisions in entry-level groups.</li>
+    </ul>
+    """,
+    "Mid": "<ul><li>Custom note for Mid level here...</li></ul>",
+    "Senior": "<ul><li>Custom note for Senior level here...</li></ul>",
+    "Manager": "<ul><li>Custom note for Manager level here...</li></ul>",
+    "Executive": "<ul><li>Custom note for Executive level here...</li></ul>"
 }
 
 job_offers_notes = {
