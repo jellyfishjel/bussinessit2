@@ -56,12 +56,14 @@ with tab2:
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
-    <p> - Predicting job success based on education  
-        - Identifying key factors influencing salaries  
-        - Understanding the role of networking and internships in career growth </p>
-    </div>
-    """)
+        <div style='font-family: Inter, sans-serif; font-size: 17px; margin-top: 1rem;'>
+            <ul>
+                <li>Predicting job success based on education</li>
+                <li>Identifying key factors influencing salaries</li>
+                <li>Understanding the role of networking and internships in career growth</li>
+                </ul>
+        </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Preview of Dataset")
     st.dataframe(df.head())
