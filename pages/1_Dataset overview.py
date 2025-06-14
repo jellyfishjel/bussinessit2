@@ -8,12 +8,13 @@ def load_data():
 
 df = load_data()
 
-# ==== Apply global styles (Inter font + sidebar color) ====
-from utils import apply_global_styles
-apply_global_styles()
 
 # Page config
 st.set_page_config(page_title="Education & Career Success", layout="wide")
+
+# ==== Apply global styles (Inter font + sidebar color) ====
+from utils import apply_global_styles
+apply_global_styles()
 
 def local_css(file_name):
     with open(file_name) as f:
