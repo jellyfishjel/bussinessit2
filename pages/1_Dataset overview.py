@@ -71,7 +71,7 @@ with tab2:
 
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
-    st.header("📊 Variable Explanation")
+    st.header("<p style="color: #cf5a2e"> 📊 Variable Explanation" </p>)
 
     # Section 1: Student Information
     st.subheader("1. Student Information")
