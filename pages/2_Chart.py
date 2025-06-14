@@ -331,7 +331,7 @@ with graph_tab[1]:
                 spikesnap='cursor',
                 spikethickness=1.2,
                 spikedash='dot',
-                gridcolor='#333'
+                gridcolor='#555'
             ),
             legend=dict(orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5)
         )
