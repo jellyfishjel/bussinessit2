@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# ==== Apply global styles (Inter font + sidebar color) ====
+# ==== Apply Global Styles ====
 from utils import apply_global_styles
 apply_global_styles()
 
@@ -17,7 +17,7 @@ def local_css(file_name):
 
 local_css("style/style.css")
 
-# ==== Import Google Fonts + Fade-in CSS ====
+# ==== Import Google Fonts + Animation ====
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
     <style>
@@ -31,38 +31,35 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ==== HEADER ====
+# ==== HERO SECTION ====
 st.markdown("""
-    <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
+    <div class="fade-in" style='text-align: center; padding: 5px 20px 30px; margin-top: -40px;'>
         <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
-            EDUCATION<br>CAREER<br>SUCCESS
+            🎓 EDUCATION<br>💼 CAREER<br>🏆 SUCCESS
         </h1>
+        <p style="font-family: 'Inter', sans-serif; font-size: 24px; color: #cf5a2e; font-weight: bold; margin-top: 20px;">
+            Insight into success, powered by data.
+        </p>
+        <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
+            Explore how education, location, and personal factors shape career paths — through interactive, visual analytics.
+        </p>
+        <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444; max-width: 900px; margin: auto;">
+            Built using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> as part of the Python Project 2 for the <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
+        </p>
     </div>
 """, unsafe_allow_html=True)
 
-# ==== SLOGAN ====
-st.markdown("""
- <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
-    <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
-        Insight into success, powered by data.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
-        Discover how different factors shape career paths—through interactive analytics.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
-        Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Py7on</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
-    </p>
- </div>
-""", unsafe_allow_html=True)
+# ==== EXPLORE BUTTON ====
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    "<div style='text-align: center;'>"
+    "<a href='/'><button style='padding: 0.7em 1.5em; font-size: 18px; background-color: #cf5a2e; color: white; border: none; border-radius: 8px; cursor: pointer;'>🚀 Explore the Dashboard</button></a>"
+    "</div>", unsafe_allow_html=True
+)
 
-# ==== OUR TEAM Title ====
-st.markdown("""
-    <div style='text-align: center; font-size: 36px; font-family: "Bungee", sans-serif; color: black; margin-top: 1rem; margin-bottom: 2rem;'>
-        OUR TEAM
-    </div>
-""", unsafe_allow_html=True)
+# ==== TEAM SECTION ====
+st.markdown("<br><br><div style='text-align: center; font-size: 36px; font-family: \"Bungee\", sans-serif; color: black;'>OUR TEAM</div><br>", unsafe_allow_html=True)
 
-# ==== TEAM MEMBERS ====
 team_members = [
     {"name": "Nguyễn Kiều Anh", "image": "image/Nguyen Kieu Anh.png"},
     {"name": "Lê Nguyễn Khánh Phương", "image": "image/Le Nguyen Khanh Phuong.png"},
@@ -73,24 +70,16 @@ team_members = [
     {"name": "Nguyễn Bội Ngọc", "image": "image/Nguyen Boi Ngoc.png"},
 ]
 
-# ==== Top row ====
-top_row = team_members[:4]
-cols_top = st.columns(len(top_row))
-for col, member in zip(cols_top, top_row):
-    with col:
-        st.image(member["image"], width=250)
-        st.markdown(
-            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
-            unsafe_allow_html=True
-        )
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-# ==== Bottom row ====
-bottom_row = team_members[4:]
-cols_bot = st.columns([1, 3, 3, 3, 1])  # center 3 members
-for i, member in enumerate(bottom_row):
-    with cols_bot[i + 1]:
-        st.image(member["image"], width=300)
-        st.markdown(
-            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
-            unsafe_allow_html=True
-        )
+def show_member_grid(members):
+    rows = [members[:4], members[4:]]
+    for row in rows:
+        cols = st.columns(len(row))
+        for col, member in zip(cols, row):
+            with col:
+                st.image(member["image"], width=250)
+                st.markdown(
+                    f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
+                    unsafe_allow_html=True
+                )
+
+show_member_grid(team_members)
