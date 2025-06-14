@@ -92,6 +92,13 @@ color_map = {'Yes': '#FFD700', 'No': '#004080'}
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
+job_level_notes = {
+    "Entry": "Entry-level individuals often have limited job offers and are exploring entrepreneurial paths.",
+    "Mid": "Mid-level professionals typically receive more offers and may begin considering starting their own ventures.",
+    "Senior": "Senior-level roles see more consistent job offers and may shift focus from entrepreneurship to mentorship or leadership.",
+    "Manager": "Managers show a balanced trend between job stability and entrepreneurial aspirations.",
+    "Executive": "Executives tend to receive fewer job offers but are more likely to engage in entrepreneurship based on strategic vision."
+}
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 36px;'>Demographics</h1>
@@ -341,3 +348,11 @@ with graph_tab[1]:
             st.plotly_chart(fig_bar, use_container_width=True)
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
+        # Display note box based on selected Job Level
+        note = job_level_notes.get(selected_level, "No specific notes available for this level.")
+        st.markdown(f"""
+        <div style="border: 1px dashed #cf5a2e; border-radius: 10px; padding: 15px; background-color: #fff6f2; margin-top: 30px;">
+            <strong>Note:</strong> {note}
+        </div>
+        """, unsafe_allow_html=True)
+
