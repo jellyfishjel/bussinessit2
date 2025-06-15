@@ -186,8 +186,8 @@ with graph_tab[0]:
                 ),
                 height=500,
                 margin=dict(t=40, l=40, r=40, b=80),
-                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5, font=dict(color='#333'))
-                )
+                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5, title=dict(text="Entrepreneurship", font=dict(color='#333')))
+            )
             st.plotly_chart(fig_density, use_container_width=True)
 
         with col2:
