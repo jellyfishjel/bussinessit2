@@ -33,7 +33,7 @@ tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 
 # === TAB 1: INTRODUCTION ===
 with tab1:
     st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 48px;'>📌 Introduction</h1>
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📌 Introduction</h1>
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
         <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship
         between academic background, career progression, and financial outcomes. By delving into various
@@ -51,7 +51,7 @@ with tab1:
 
 # === TAB 2: DATASET OVERVIEW ===
 with tab2:
-    st.markdown("<h1 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 48px;'>📂 Dataset Overview</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-family: Inter, sans-serif; color: #cf5a2e; font-size: 40px;'>📂 Dataset Overview</h1>", unsafe_allow_html=True)
 
     st.markdown("""
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
@@ -77,7 +77,7 @@ with tab2:
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
     st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 48px;'>📊 Variable Explanation</h1>
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Variable Explanation</h1>
     """, unsafe_allow_html=True)
 
     # 1. Student Info
