@@ -322,12 +322,15 @@ with graph_tab[1]:
             title=dict(text=f"Entrepreneurship Distribution by Age – {selected_level} Level", font=dict(color='#333')),
             font=dict(color='#333'),
             margin=dict(t=40, l=40, r=40, b=40),
-            legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
             bargap=0.1,
-            xaxis=dict(tickvals=even_ages),
-            yaxis=dict(title="Percentage", range=[0, 1], tickformat=".0%"),
-            legend=dict(orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5)
+            xaxis=dict(
+                tickvals=even_ages,
+                titlefont=dict(color='#333'),
+                tickfont=dict(color='#333')
+            ),
+            yaxis=dict(title="Percentage", range=[0, 1], tickformat=".0%", titlefont=dict(color='#333'), tickfont=dict(color='#333')),
+            legend=dict(orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5,  font=dict(color='#333'))
         )
 
         df_avg_offers = (
