@@ -238,56 +238,75 @@ with graph_tab[0]:
             )
             st.plotly_chart(fig_density, use_container_width=True)
 
-            #         === Notes ===
-            note_style = """
-            <div style="
-                background-color: #fff4ec;
-                border-left: 6px solid #cf5a2e;
-                padding: 18px 22px;
-                margin-top: 25px;
-                border-radius: 12px;
-                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-                font-family: 'Inter', sans-serif;
-            ">
-                <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
-                    📌 {title}
-                </div>
-                <div style="font-size: 14px; color: #444;">
-                    {text}
-                </div>
+        with col2:
+            group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
+            pie_data = df_demo[group_col].value_counts().reset_index()
+            pie_data.columns = [group_col, 'Count']
+
+            fig_pie = px.pie(
+                pie_data,
+                names=group_col,
+                values='Count',
+                title=f"{group_col.replace('_', ' ')} Composition",
+                color_discrete_sequence=px.colors.sequential.RdBu
+            )
+            fig_pie.update_layout(
+                height=500,
+                margin=dict(t=40, l=20, r=20, b=80),
+                legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5)
+            )
+            st.plotly_chart(fig_pie, use_container_width=True)
+
+        # === Notes Section ===
+        note_style = """
+        <div style="
+            background-color: #fff4ec;
+            border-left: 6px solid #cf5a2e;
+            padding: 18px 22px;
+            margin-top: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            font-family: 'Inter', sans-serif;
+        ">
+            <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+                📌 {title}
             </div>
-            """
+            <div style="font-size: 14px; color: #444;">
+                {text}
+            </div>
+        </div>
+        """
 
+        note_col1, note_col2 = st.columns(2)
 
-            # Hiển thị Gender Notes
-            note_col1, note_col2 = st.columns(2)
-
-            with note_col1:
-                st.markdown(
-                    note_style.format(
-                        title=f"Gender – Density Chart Insight ({selected_level})",
-                        text=gender_density_notes.get(selected_level, "No density notes for this level.")
-                    ),
-                    unsafe_allow_html=True
-                )
-
-            with note_col2:
-                st.markdown(
-                    note_style.format(
-                        title=f"Gender – Pie Chart Insight ({selected_level})",
-                        text=gender_pie_notes.get(selected_level, "No pie chart notes for this level.")
-                ),
-                unsafe_allow_html=True
-            )
-    
-        # Hiển thị Field of Study Notes
+        with note_col1:
             st.markdown(
-                    note_style.format(
-                        title=f"Field of Study Insight – {selected_level}",
-                        text=field_of_study_notes.get(selected_level, "No field of study notes for this level.")
+                note_style.format(
+                    title=f"{chart_option} – Density Chart Insight ({selected_level})",
+                    text=gender_density_notes.get(selected_level, "No density notes available.") if chart_option == 'Gender Distribution' else ""
                 ),
                 unsafe_allow_html=True
             )
+
+        with note_col2:
+            st.markdown(
+                note_style.format(
+                    title=f"{chart_option} – Pie Chart Insight ({selected_level})",
+                    text=gender_pie_notes.get(selected_level, "No pie chart notes available.") if chart_option == 'Gender Distribution' else ""
+                ),
+                unsafe_allow_html=True
+            )
+
+        # Field of Study ghi chú riêng
+        if chart_option == 'Field of Study':
+            st.markdown(
+                note_style.format(
+                    title=f"Field of Study Insight – {selected_level}",
+                    text=field_of_study_notes.get(selected_level, "No notes for this level.")
+                ),
+                unsafe_allow_html=True
+            )
+
 
 
 # === TAB 2 (Job Offers) ===
