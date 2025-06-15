@@ -92,6 +92,45 @@ color_map = {'Yes': '#FFD700', 'No': '#004080'}
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
+
+density1_notes = {
+    "Entry": """
+        - Most individuals fall between ages 22–25, consistent with recent graduates starting careers.<br>
+        - The peak density shows a sharp entry age, suggesting a clear transition from education to employment.<br>
+    """,
+    "Mid": """
+        - Concentrated around ages 23–26, indicating this is a common stage for early career growth.<br>
+        - The curve shifts right compared to Entry, reflecting natural career progression.<br>
+    """,
+    "Senior": """
+        - Age distribution is flatter and slightly older (24–27), showing a range of career pacing.<br>
+        - The peak is less sharp, indicating diverse timing in reaching senior roles.<br>
+    """,
+    "Executive": """
+        - Surprisingly younger skew, with a peak at 22–25, suggesting some reach this level early, likely via entrepreneurship.<br>
+        - A broader spread indicates both early achievers and experienced individuals.<br>
+    """
+}
+
+pie1_notes = {
+    "Entry": """
+        - Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.<br>
+        - Female and male participation rates are the highest at this level, indicating wide entry into the workforce.<br>
+    """,
+    "Mid": """
+        - Male proportion slightly increases, showing a potential gender gap in career progression.<br>
+        - Female representation remains relatively high, but slightly lower than entry-level.<br>
+    """,
+    "Senior": """
+        - Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.<br>
+        - The total number is smaller, suggesting fewer people reach this stage.<br>
+    """,
+    "Executive": """
+        - Males dominate this level, revealing a strong gender imbalance at the top.<br>
+        - Female and other gender groups are significantly underrepresented.<br>
+    """
+}
+
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
@@ -195,12 +234,43 @@ with graph_tab[0]:
             fig_donut.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
-                title=f"{chart_option} Distribution (Donut Chart)",
+                title=f"{chart_option}",
                 height=350,
                 margin=dict(t=40, l=40, r=40, b=40),
                 showlegend=True
             )
             st.plotly_chart(fig_donut, use_container_width=True)
+            
+            # Add dual note boxes below the two charts
+            note_density1 = density1_notes.get(selected_level, "No specific notes available for this level.")
+            note_pie1 = pie1_notes.get(selected_level, "No specific notes available for this level.")
+            
+            note_style = """
+            <div style="
+                background-color: #fff4ec;
+                border-left: 6px solid #cf5a2e;
+                padding: 18px 22px;
+                margin-top: 25px;
+                border-radius: 12px;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+                font-family: 'Segoe UI', sans-serif;
+            ">
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+                    📌 {title}
+                </div>
+                <div style="font-size: 14px; color: #444;">
+                    {text}
+                </div>
+            </div>
+            """
+            
+            note_col1, note_col2 = st.columns(2)
+            
+            with note_col1:
+                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=note_density1), unsafe_allow_html=True)
+            
+            with note_col2:
+                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=note_pie1), unsafe_allow_html=True)
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
