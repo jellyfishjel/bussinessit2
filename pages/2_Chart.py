@@ -91,71 +91,6 @@ color_map = {'Yes': '#FFD700', 'No': '#004080'}
 # Main Tabs
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
-# Job level descriptions for Field of Study
-field_study_desc = {
-    "Entry Level": """
-- **Entry-level individuals** are mostly between ages 24–26, with peaks in **Computer Science** and **Engineering**.  
-- Study field distribution is fairly balanced, with **Mathematics** leading, reflecting the general demand for **STEM-related roles**.
-""",
-    "Mid Level": """
-- **Average age** ranges from 25–27, with **Computer Science** and **Law** showing the highest density.  
-- Study fields are quite diverse, with **Law** and **Business** being the most prominent, reflecting **varied career trajectories** at this stage.
-""",
-    "Senior Level": """
-- **Senior-level participants** have a wider age range, mostly around 24–26, particularly in **Medicine** and **Business**.  
-- **Engineering** is the most common study field, while **Computer Science** is less frequent—possibly due to the **higher seniority typically required in technical roles**.
-""",
-    "Executive Level": """
-- **Age distribution** is broader, peaking around 25–27; **Law** and **Arts** tend to have older participants.  
-- **Arts** and **Mathematics** dominate the study fields, while **Business** and **Engineering** are less represented, indicating **more specialized paths** at this level.
-"""
-}
-
-# Gender chart descriptions by job level
-gender_descriptions = {
-    "Entry Level": {
-        "Pie": """
-- Gender distribution is nearly equal, suggesting **balanced access** to entry-level opportunities.  
-- **Female and male participation** is highest at this level, indicating wide entry into the workforce.
-""",
-        "Density": """
-- Most individuals fall between ages **22–25**, consistent with **recent graduates** starting careers.  
-- The peak density shows a **sharp entry age**, suggesting a clear transition from **education to employment**.
-"""
-    },
-    "Mid Level": {
-        "Pie": """
-- **Male proportion slightly increases**, showing a potential **gender gap** in career progression.  
-- **Female representation** remains relatively high, but slightly lower than entry-level.
-""",
-        "Density": """
-- Concentrated around ages **23–26**, indicating a **common stage for early career growth**.  
-- The curve shifts right compared to Entry, reflecting **natural career progression**.
-"""
-    },
-    "Senior Level": {
-        "Pie": """
-- Gender representation becomes **more balanced again**, possibly reflecting **equal long-term commitment**.  
-- The total number is smaller, suggesting **fewer people reach this stage**.
-""",
-        "Density": """
-- Age distribution is **flatter and slightly older (24–27)**, showing a range of **career pacing**.  
-- The peak is **less sharp**, indicating **diverse timing** in reaching senior roles.
-"""
-    },
-    "Executive Level": {
-        "Pie": """
-- **Males dominate** this level, revealing a **strong gender imbalance** at the top.  
-- **Female and other gender groups** are significantly underrepresented.
-""",
-        "Density": """
-- Surprisingly **younger skew**, with a peak at **22–25**, suggesting some reach this level early, likely via **entrepreneurship**.  
-- A **broader spread** indicates both **early achievers** and **experienced individuals**.
-"""
-    }
-}
-
-
 # === TAB 1 (Demographics) ===
 with graph_tab[0]:
     st.markdown("""
@@ -211,20 +146,6 @@ with graph_tab[0]:
                     </div></div>
                 """.format(len(df_demo), display_fields),
                 unsafe_allow_html=True)
-                
-        if not df_demo.empty:
-            with st.container():
-                st.markdown("""<div style="border: 2px dashed #cf5a2e; border-radius: 10px; padding: 16px; background-color: #fffaf3; margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px; color: #cf5a2e;">📌 Description based on Job Level</h4>
-                """, unsafe_allow_html=True)
-
-                if chart_option == "Field of Study":
-                    desc = field_study_desc.get(selected_level, "No description available.")
-                else:  # Gender Distribution
-                    desc = f"**Pie Chart (Gender):**  \n{gender_descriptions[selected_level]['Pie']}\n\n**Density Chart (Age):**  \n{gender_descriptions[selected_level]['Density']}"
-
-                st.markdown(desc, unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
 
@@ -281,7 +202,7 @@ with graph_tab[0]:
             )
             st.plotly_chart(fig_donut, use_container_width=True)
 
-# === TAB 2 (Job Offers) ===-----------------------------------------------------------------------------------------------------------------------------
+# === TAB 2 (Job Offers) ===
 job_level_notes = {
     "Entry": """
         - Majority of individuals across all ages do not pursue entrepreneurship.<br>
