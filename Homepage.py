@@ -7,17 +7,17 @@ st.set_page_config(
     layout="wide"
 )
 
-# ==== Apply global styles ====
+# ==== Apply global styles (Inter font + sidebar color) ====
 from utils import apply_global_styles
 apply_global_styles()
 
 def local_css(file_name):
     with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
 local_css("style/style.css")
 
-# ==== Google Fonts + Fade-In Animation ====
+# ==== Import Google Fonts + Fade-in CSS ====
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
     <style>
@@ -28,57 +28,31 @@ st.markdown("""
             0% {opacity: 0;}
             100% {opacity: 1;}
         }
-        h1 {
-            font-family: "Bungee", sans-serif;
-            font-size: 60px;
-            color: #cf5a2e;
-            line-height: 1.0;
-            margin: 0;
-        }
-        .intro-text {
-            text-align: center;
-            max-width: 900px;
-            margin: auto;
-            padding-top: 20px;
-        }
-        .intro-text p {
-            font-family: 'Inter', sans-serif;
-            margin: 8px 0;
-        }
-        .intro-text p.main {
-            font-size: 25px;
-            color: #cf5a2e;
-            font-weight: bold;
-        }
-        .intro-text p.sub {
-            font-size: 18px;
-            color: #222;
-        }
-        .intro-text p.note {
-            font-size: 17px;
-            color: #444;
-        }
     </style>
 """, unsafe_allow_html=True)
 
 # ==== HEADER ====
 st.markdown("""
-    <section style='text-align: center; margin-top: -50px; padding-bottom: 20px;'>
-        <h1>EDUCATION<br>CAREER<br>SUCCESS</h1>
-    </section>
+    <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
+        <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
+            EDUCATION<br>CAREER<br>SUCCESS
+        </h1>
+    </div>
 """, unsafe_allow_html=True)
 
-# ==== SLOGAN + INTRO ====
+# ==== SLOGAN ====
 st.markdown("""
-    <div class="fade-in intro-text">
-        <p class="main">Insight into success, powered by data.</p>
-        <p class="sub">Discover how different factors shape career paths—through interactive analytics.</p>
-        <p class="note">
-            Developed using <b>Python, GitHub, and Streamlit</b> by 
-            <b style="color: #cf5a2e;">Team Seven.py</b> as part of the Python Project 2 
-            for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
-        </p>
-    </div>
+ <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
+    <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
+        Insight into success, powered by data.
+    </p>
+    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
+        Discover how different factors shape career paths—through interactive analytics.
+    </p>
+    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
+        Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Seven.py</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
+    </p>
+ </div>
 """, unsafe_allow_html=True)
 
 # ==== OUR TEAM Title ====
