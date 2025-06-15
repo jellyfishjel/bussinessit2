@@ -28,13 +28,7 @@ def apply_global_styles():
                 border: 2px solid #cf5a2e !important;  /* viền cam */
                 color: #333 !important;
             }
-            [data-testid="metric-container"] {
-                color: #333 !important;
-            }
-            /* Số trong metric */
-            [data-testid="stMetricValue"] {
-                color: #333 !important;
-            }
+
             [data-testid="stMetricLabel"] {
                     color: #333 !important;
             }
