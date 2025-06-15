@@ -72,7 +72,7 @@ with tab2:
     """, unsafe_allow_html=True)
 
     st.markdown("<h2 style='font-family: Inter, sans-serif; color: #333; font-size: 30px;'>Preview of Dataset</h2>", unsafe_allow_html=True)
-    st.dataframe(df.head())
+    st.dataframe(df)
 
 # === TAB 3: VARIABLE EXPLANATION ===
 with tab3:
