@@ -32,14 +32,8 @@ def apply_global_styles():
             [data-testid="stMetricLabel"] {
                     color: #333 !important;
             }
-            label, span, p {
+            label, span {
                 color: #333 !important;
-            }
-            [role="menuitem"], [role="menuitem"] span {
-                color: #cf5a2e !important;
-            }
-            [role="menu"] {
-                background-color: #fdf7f3 !important;
             }
         </style>
     """, unsafe_allow_html=True)
