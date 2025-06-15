@@ -172,7 +172,8 @@ with graph_tab[0]:
             fig_density.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
-                title=title,
+                title=dict(text=title, font=dict(color='#333'),
+                font=dict(color='#333'),
                 xaxis_title="Age",
                 yaxis_title="Density",
                 height=500,
