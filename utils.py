@@ -17,8 +17,8 @@ def apply_global_styles():
                 
                 /* Gender multiselect tags */
              [data-baseweb="tag"] {
-                background-color: #FFA726 !important;
-                color: cf5a2e !important;
+                background-color: #cf5a2e !important;
+                color: white !important;
                 font-color: white;
             }
     </style>
