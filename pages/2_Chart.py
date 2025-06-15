@@ -60,7 +60,6 @@ else:
 # Job Level Filter
 job_levels = sorted(df['Current_Job_Level'].dropna().unique())
 selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
-st.write(df['Current_Job_Level'].unique())
 
 # Age Filter
 min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
@@ -90,16 +89,17 @@ graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # Descriptions by level
 gender_desc = {
-    'Entry Level': "- Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.\n- Female and male participation rates are the highest at this level, indicating wide entry into the workforce.",
-    'Mid Level': "- Male proportion slightly increases, showing a potential gender gap in career progression.\n- Female representation remains relatively high, but slightly lower than entry-level.",
-    'Senior Level': "- Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.\n- The total number is smaller, suggesting fewer people reach this stage.",
-    'Executive Level': "- Males dominate this level, revealing a strong gender imbalance at the top.\n- Female and other gender groups are significantly underrepresented."
+    "Entry": "This level typically includes fresh graduates or individuals with less than 2 years of work experience. Gender distribution at this level often reflects broader enrollment trends in universities.",
+    "Mid": "Mid-level professionals generally have some years of work experience and are beginning to take on leadership responsibilities. Gender balance can vary depending on the field.",
+    "Senior": "Senior roles involve greater responsibilities, including strategic planning and team leadership. Gender gaps may become more pronounced here.",
+    "Executive": "Executive-level roles include top management and decision-makers. These roles often show significant gender disparities in many industries."
 }
+
 field_desc = {
-    'Entry Level': "- Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.\n- Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.",
-    'Mid Level': "- Average age ranges from 25–27, with Computer Science and Law showing the highest density.\n- Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.",
-    'Senior Level': "- Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.\n- Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.",
-    'Executive Level': "- Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.\n- Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level."
+    "Entry": "Common fields at the entry level often reflect students' initial degrees and career interests.",
+    "Mid": "Mid-level professionals may start to shift or specialize in fields that offer career growth.",
+    "Senior": "Fields at the senior level often require deeper expertise or managerial skills.",
+    "Executive": "Executives are more concentrated in fields like business, management, or entrepreneurship."
 }
 
 # === TAB 1 (Demographics) ===
