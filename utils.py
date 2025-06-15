@@ -19,7 +19,7 @@ def apply_global_styles():
              [data-baseweb="tag"] {
                 background-color: #FFA726 !important;
                 color: white !important;
-                font-weight: 500;
+                font-color: white;
             }
     </style>
         </style>
