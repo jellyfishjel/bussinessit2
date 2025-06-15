@@ -371,8 +371,9 @@ with graph_tab[1]:
             st.plotly_chart(fig_bar, use_container_width=True)
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
+            
         # Add dual note boxes below the two charts
-        note_bar = note_bar_dict[selected_level]
+        note_bar = note_bar_dict.get(selected_level, "No specific notes available for this level.")
         note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
         
         note_style = """
