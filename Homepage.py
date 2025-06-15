@@ -322,7 +322,6 @@ with graph_tab[1]:
             title=dict(text=f"Entrepreneurship Distribution by Age – {selected_level} Level", font=dict(color='#333')),
             font=dict(color='#333'),
             margin=dict(t=40, l=40, r=40, b=40),
-            legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
             bargap=0.1,
             xaxis=dict(tickvals=even_ages),
