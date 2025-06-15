@@ -110,6 +110,7 @@ with graph_tab[0]:
     else:
         if chart_option == 'Gender Distribution':
             with st.container():
+                top_job_level = df_demo['Current_Job_Level'].mode()[0]
                 st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
                     <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
                         <div>
@@ -121,8 +122,8 @@ with graph_tab[0]:
                             <div style="font-size: 28px;">{:.1f}</div>
                         </div>
                         <div>
-                            <div style="font-size: 14px; color: #555;">% Female</div>
-                            <div style="font-size: 28px;">{:.1f}%</div>
+                            <div style="font-size: 14px; color: #555;">Top Job Level</div>
+                            <div style="font-size: 28px;">{top_job_level}</div>
                         </div>
                     </div></div>
                 """.format(len(df_demo), df_demo['Age'].median(),
