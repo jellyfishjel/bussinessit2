@@ -195,6 +195,7 @@ with graph_tab[0]:
             fig_donut.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#333'),
                 title=f"{chart_option} Distribution (Donut Chart)",
                 height=350,
                 margin=dict(t=40, l=40, r=40, b=40),
