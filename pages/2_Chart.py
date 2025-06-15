@@ -174,11 +174,19 @@ with graph_tab[0]:
                 plot_bgcolor='rgba(0,0,0,0)',
                 title=dict(text=title, font=dict(color='#333')),
                 font=dict(color='#333'),
-                xaxis_title="Age",
-                yaxis_title="Density",
+                xaxis=dict(
+                    title="Age",
+                    titlefont=dict(color='#333'),
+                    tickfont=dict(color='#333')
+                ),
+                yaxis=dict(
+                    title="Density",
+                    titlefont=dict(color='#333'),
+                    tickfont=dict(color='#333')
+                ),
                 height=500,
                 margin=dict(t=40, l=40, r=40, b=80),
-                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
+                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5, font=dict(color='#333'))
             )
             st.plotly_chart(fig_density, use_container_width=True)
 
