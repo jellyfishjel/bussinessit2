@@ -96,57 +96,9 @@ with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
     """, unsafe_allow_html=True)
-
-
-    # Description per Job Level
-    level_descriptions = {
-        "Entry": """
-        **📊 Pie Chart (Gender)**  
-        Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.  
-        Female and male participation rates are the highest at this level, indicating wide entry into the workforce.
-
-        **📈 Density Chart (Age)**  
-        Most individuals fall between ages 22–25, consistent with recent graduates starting careers.  
-        The peak density shows a sharp entry age, suggesting a clear transition from education to employment.
-        """,
-        "Mid": """
-        **📊 Pie Chart (Gender)**  
-        Male proportion slightly increases, showing a potential gender gap in career progression.  
-        Female representation remains relatively high, but slightly lower than entry-level.
-
-        **📈 Density Chart (Age)**  
-        Concentrated around ages 23–26, indicating this is a common stage for early career growth.  
-        The curve shifts right compared to Entry, reflecting natural career progression.
-        """,
-        "Senior": """
-        **📊 Pie Chart (Gender)**  
-        Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.  
-        The total number is smaller, suggesting fewer people reach this stage.
-
-        **📈 Density Chart (Age)**  
-        Age distribution is flatter and slightly older (24–27), showing a range of career pacing.  
-        The peak is less sharp, indicating diverse timing in reaching senior roles.
-        """,
-        "Executive": """
-        **📊 Pie Chart (Gender)**  
-        Males dominate this level, revealing a strong gender imbalance at the top.  
-        Female and other gender groups are significantly underrepresented.
-
-        **📈 Density Chart (Age)**  
-        Surprisingly younger skew, with a peak at 22–25, suggesting some reach this level early, likely via entrepreneurship.  
-        A broader spread indicates both early achievers and experienced individuals.
-        """
-    }
-
     
-    if selected_level in level_descriptions:
-        st.markdown(f"<div style='margin-top: -10px; margin-bottom: 20px;'>{level_descriptions[selected_level]}</div>", unsafe_allow_html=True)
-
-
     chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
 
-
-    
     df_demo = gender_filtered[
         (gender_filtered['Current_Job_Level'] == selected_level) &
         (gender_filtered['Age'].between(age_range[0], age_range[1])) &
