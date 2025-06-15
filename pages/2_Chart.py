@@ -170,6 +170,7 @@ with graph_tab[0]:
                     ))
                     
                     fig_density.update_layout(
+                        template=None,
                         paper_bgcolor='rgba(0,0,0,0)',
                         plot_bgcolor='rgba(0,0,0,0)',
                         title=dict(
