@@ -1,3 +1,4 @@
+# ==== Import Libraries ====
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,269 +7,133 @@ from scipy.stats import gaussian_kde
 import numpy as np
 
 # ==== Page Config ====
-st.set_page_config(page_title="Education Career App", layout="wide")
-
-# ==== Local CSS ====
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-
-local_css("style/style.css")
+st.set_page_config(page_title="Chart", layout="wide")
 
 # ==== Load Data ====
 @st.cache_data
 def load_data():
-    return pd.read_excel("education_career_success.xlsx")
+    return pd.read_excel("education_career_success.xlsx", sheet_name="education_career_success")
 
 df = load_data()
 
-# ==== Note Style (Fix vị trí) ====
+# ==== Style for Notes ====
 note_style = """
-<div style="
-    background-color: #FADADD;
-    border-left: 6px solid #FB607F;
-    padding: 18px 22px;
-    margin-top: 50px;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-    font-family: 'Segoe UI', sans-serif;
-">
-    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
-        📌 {title}
-    </div>
-    <div style="font-size: 14px; color: #444;">
-        {text}
-    </div>
+<div style="background-color:#ffe6e6; border-left: 6px solid #ff4d4d; padding: 16px; margin-bottom: 20px; border-radius: 10px;">
+    <h4 style="margin-top: 0;">📌 {title}</h4>
+    {text}
 </div>
 """
 
-# ==== Sidebar Filters ====
-st.sidebar.title("Filters")
+# ==== Gender Distribution Pie Chart ====
+st.subheader("Gender Distribution")
+gender_counts = df['Gender'].value_counts()
+gender_percent = gender_counts / gender_counts.sum() * 100
 
-gender_options = sorted(df['Gender'].dropna().unique())
-selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, default=gender_options)
+fig_pie = go.Figure(data=[go.Pie(
+    labels=gender_percent.index,
+    values=gender_percent.values,
+    hole=0.5,
+    marker=dict(colors=['#1f77b4', '#ff4136', '#0074D9']),
+    textinfo='percent+label'
+)])
+fig_pie.update_layout(margin=dict(t=0, b=0, l=0, r=0), height=300)
 
-if not selected_genders:
-    st.sidebar.warning("⚠️ No gender selected. Using full data. Please choose at least one option.")
-    gender_filtered = df
-elif 'All' in selected_genders:
-    gender_filtered = df
-else:
-    gender_filtered = df[df['Gender'].isin(selected_genders)]
+# ==== Age Distribution KDE ====
+st.subheader("Age Distribution by Gender")
+genders = df['Gender'].unique()
+colors = {'Male': 'blue', 'Female': 'red', 'Other': 'purple'}
 
-job_levels = sorted(df['Current_Job_Level'].dropna().unique())
-selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
+fig_kde = go.Figure()
+for gender in genders:
+    subset = df[df['Gender'] == gender]
+    if len(subset) > 1:
+        kde = gaussian_kde(subset['Age'])
+        x = np.linspace(df['Age'].min(), df['Age'].max(), 200)
+        fig_kde.add_trace(go.Scatter(
+            x=x,
+            y=kde(x),
+            mode='lines',
+            name=gender,
+            line=dict(color=colors.get(gender, 'gray'))
+        ))
 
-min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
-age_range = st.sidebar.slider("Select Age Range", min_value=min_age, max_value=max_age, value=(min_age, max_age))
+fig_kde.update_layout(xaxis_title='Age', yaxis_title='Density', height=300)
 
-if age_range[0] == age_range[1]:
-    st.sidebar.warning(f"⚠️ Only one age ({age_range[0]}) selected. Using full age range.")
-    age_range = (min_age, max_age)
+# ==== Layout with Columns ====
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.plotly_chart(fig_kde, use_container_width=True)
+with col2:
+    st.plotly_chart(fig_pie, use_container_width=True)
 
-st.sidebar.markdown("**Select Entrepreneurship Status**")
-show_yes = st.sidebar.checkbox("Yes", value=True)
-show_no = st.sidebar.checkbox("No", value=True)
+# ==== Notes Data ====
 
-selected_statuses = []
-if show_yes:
-    selected_statuses.append("Yes")
-if show_no:
-    selected_statuses.append("No")
-
-if not (show_yes or show_no):
-    st.sidebar.warning("⚠️ No status selected. Using full data. Please choose at least one option.")
-    selected_statuses = ['Yes', 'No']
-
-color_map = {'Yes': '#FFD700', 'No': '#004080'}
-
-# ==== Tab Setup ====
-graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
-
-# ==== Notes ====
-density1_notes = {
-    "Entry": """
-        - Most individuals fall between ages 22–25, consistent with recent graduates starting careers.<br>
-        - The peak density shows a sharp entry age, suggesting a clear transition from education to employment.<br>
-    """,
-    "Mid": """
-        - Concentrated around ages 23–26, indicating this is a common stage for early career growth.<br>
-        - The curve shifts right compared to Entry, reflecting natural career progression.<br>
-    """,
-    "Senior": """
-        - Age distribution is flatter and slightly older (24–27), showing a range of career pacing.<br>
-        - The peak is less sharp, indicating diverse timing in reaching senior roles.<br>
-    """,
-    "Executive": """
-        - Surprisingly younger skew, with a peak at 22–25, suggesting some reach this level early, likely via entrepreneurship.<br>
-        - A broader spread indicates both early achievers and experienced individuals.<br>
-    """
-}
-
+# Gender Notes by Level
 pie1_notes = {
     "Entry": """
-        - Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.<br>
-        - Female and male participation rates are the highest at this level, indicating wide entry into the workforce.<br>
+    <ul>
+        <li>Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.</li>
+        <li>Female and male participation rates are the highest at this level, indicating wide entry to the workforce.</li>
+    </ul>
     """,
     "Mid": """
-        - Male proportion slightly increases, showing a potential gender gap in career progression.<br>
-        - Female representation remains relatively high, but slightly lower than entry-level.<br>
+    <ul>
+        <li>Female representation begins to drop slightly, signaling potential career progression challenges.</li>
+        <li>Male dominance increases gradually at mid-level positions.</li>
+    </ul>
     """,
     "Senior": """
-        - Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.<br>
-        - The total number is smaller, suggesting fewer people reach this stage.<br>
-    """,
-    "Executive": """
-        - Males dominate this level, revealing a strong gender imbalance at the top.<br>
-        - Female and other gender groups are significantly underrepresented.<br>
+    <ul>
+        <li>Significant drop in female participation at senior levels, highlighting a possible leadership gap.</li>
+        <li>Gender imbalance may reflect systemic barriers or differing career paths.</li>
+    </ul>
     """
 }
 
-field_notes = {
+# Age Notes by Level
+age_notes = {
     "Entry": """
-        - Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.<br>
-        - Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.
-    """,
-    "Executive": """
-        - Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.<br>
-        - Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level.
+    <ul>
+        <li>Most individuals fall between ages 22–25, consistent with recent graduates starting careers.</li>
+        <li>The peak density shows a sharp entry age, suggesting a clear transition from education to work.</li>
+    </ul>
     """,
     "Mid": """
-        - Average age ranges from 25–27, with Computer Science and Law showing the highest density.<br>
-        - Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.
+    <ul>
+        <li>Age range broadens, with many individuals between 26–30, reflecting progression after initial entry.</li>
+        <li>Gradual density slope indicates varying speeds of career advancement.</li>
+    </ul>
     """,
     "Senior": """
-        - Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.<br>
-        - Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.
+    <ul>
+        <li>Senior roles are concentrated in ages 30+, showing typical timeline for long-term career development.</li>
+        <li>Lower density suggests fewer individuals reach these positions, aligning with hierarchical structure.</li>
+    </ul>
     """
 }
 
-# ==== TAB 1 ====
-with graph_tab[0]:
-    st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
-    """, unsafe_allow_html=True)
-    
-    chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
+# ==== User Level Selection ====
+selected_level = st.selectbox("Select Career Level for Notes", ["Entry", "Mid", "Senior"])
 
-    df_demo = gender_filtered[
-        (gender_filtered['Current_Job_Level'] == selected_level) &
-        (gender_filtered['Age'].between(age_range[0], age_range[1])) &
-        (gender_filtered['Entrepreneurship'].isin(selected_statuses))
-    ]
+# ==== Show Notes ====
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown(
+        note_style.format(
+            title="Age Distribution Key Note – " + selected_level,
+            text=age_notes.get(selected_level, "")
+        ),
+        unsafe_allow_html=True
+    )
 
-    if df_demo.empty:
-        st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
-    else:
-        if chart_option == 'Gender Distribution':
-            with st.container():
-                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Total Records</div>
-                            <div style="font-size: 28px;">{}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Median Age</div>
-                            <div style="font-size: 28px;">{:.1f}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">% Female</div>
-                            <div style="font-size: 28px;">{:.1f}%</div>
-                        </div>
-                    </div></div>
-                """.format(len(df_demo), df_demo['Age'].median(),
-                           (df_demo['Gender'] == 'Female').mean() * 100),
-                unsafe_allow_html=True)
-
-        else:
-            top_fields = df_demo['Field_of_Study'].value_counts().head(3).index.tolist()
-            display_fields = ", ".join(top_fields) if top_fields else "N/A"
-            with st.container():
-                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Total Records</div>
-                            <div style="font-size: 28px;">{}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Top 3 Fields</div>
-                            <div style="font-size: 20px;">{}</div>
-                        </div>
-                    </div></div>
-                """.format(len(df_demo), display_fields),
-                unsafe_allow_html=True)
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            fig_density = go.Figure()
-            group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
-            title = f"Age Distribution by {group_col.replace('_', ' ')}"
-            categories = df_demo[group_col].dropna().unique()
-
-            for cat in categories:
-                age_data = df_demo[df_demo[group_col] == cat]['Age']
-                if len(age_data) > 1:
-                    kde = gaussian_kde(age_data)
-                    x_vals = np.linspace(age_range[0], age_range[1], 100)
-                    y_vals = kde(x_vals)
-                    fig_density.add_trace(go.Scatter(
-                        x=x_vals,
-                        y=y_vals,
-                        mode='lines',
-                        name=str(cat),
-                        fill='tozeroy'
-                    ))
-
-            fig_density.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                title=title,
-                xaxis_title="Age",
-                yaxis_title="Density",
-                height=500,
-                margin=dict(t=40, l=40, r=40, b=80),
-                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
-            )
-            st.plotly_chart(fig_density, use_container_width=True)
-            if chart_option == 'Gender Distribution':
-                st.markdown(note_style.format(
-                    title=f"Age Distribution Key Note – {selected_level}",
-                    text=density1_notes.get(selected_level, "")
-                ), unsafe_allow_html=True)
-
-        with col2:
-            if chart_option == 'Gender Distribution':
-                counts = df_demo['Gender'].value_counts().reset_index()
-                counts.columns = ['Gender', 'Count']
-                labels, values = counts['Gender'], counts['Count']
-            else:
-                counts = df_demo['Field_of_Study'].value_counts().reset_index()
-                counts.columns = ['Field of Study', 'Count']
-                labels, values = counts['Field of Study'], counts['Count']
-
-            fig_donut = go.Figure(data=[go.Pie(labels=labels, values=values, hole=0.5)])
-            fig_donut.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                title=f"{chart_option}",
-                height=350,
-                margin=dict(t=40, l=40, r=40, b=40),
-                showlegend=True
-            )
-            st.plotly_chart(fig_donut, use_container_width=True)
-
-            if chart_option == 'Gender Distribution':
-                st.markdown(note_style.format(
-                    title=f"Gender Distribution Key Note – {selected_level}",
-                    text=pie1_notes.get(selected_level, "")
-                ), unsafe_allow_html=True)
-            elif chart_option == 'Field of Study':
-                st.markdown(note_style.format(
-                    title=f"Field of Study Key Note – {selected_level}",
-                    text=field_notes.get(selected_level, "")
-                ), unsafe_allow_html=True)
+with col2:
+    st.markdown(
+        note_style.format(
+            title="Gender Distribution Key Note – " + selected_level,
+            text=pie1_notes.get(selected_level, "")
+        ),
+        unsafe_allow_html=True
+    )
 
 
 
