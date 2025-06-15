@@ -28,5 +28,9 @@ def apply_global_styles():
                 border: 2px solid #cf5a2e !important;  /* viền cam */
                 color: #333 !important;
             }
+            [data-testid="metric-container"] {
+                color: #333 !important;
+            }
+
         </style>
     """, unsafe_allow_html=True)
