@@ -384,32 +384,29 @@ with graph_tab[1]:
         note_bar = job_level_notes.get(selected_level, "No specific notes available for this level.")
         note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
         
-        with st.expander(f"📌 Key Notes – {selected_level} Level", expanded=False):
-            st.markdown(
-                f"""
-                <div style="
-                    background-color: #fff4ec;
-                    border-left: 6px solid #cf5a2e;
-                    padding: 18px 22px;
-                    margin-top: 10px;
-                    border-radius: 12px;
-                    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-                    font-family: 'Segoe UI', sans-serif;
-                ">
-                    <div style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: #cf5a2e;">
-                        Entrepreneurship Distribution
-                    </div>
-                    <div style="font-size: 14px; color: #444; line-height: 1.6;">
-                        {note_bar.replace("<br>", "<br>")}
-                    </div>
-                    <hr style="margin: 20px 0; border: none; border-top: 1px solid #e0d3cd;">
-                    <div style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: #cf5a2e;">
-                        Average Job Offers
-                    </div>
-                    <div style="font-size: 14px; color: #444; line-height: 1.6;">
-                        {note_line.replace("<br>", "<br>")}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        note_style = """
+        <div style="
+            background-color: #fff4ec;
+            border-left: 6px solid #cf5a2e;
+            padding: 18px 22px;
+            margin-top: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            font-family: 'Segoe UI', sans-serif;
+        ">
+            <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+                📌 {title}
+            </div>
+            <div style="font-size: 14px; color: #444;">
+                {text}
+            </div>
+        </div>
+        """
+        
+        note_col1, note_col2 = st.columns(2)
+        
+        with note_col1:
+            st.markdown(note_style.format(title=f"Entrepreneurship Distribution Key Note – {selected_level}", text=note_bar), unsafe_allow_html=True)
+        
+        with note_col2:
+            st.markdown(note_style.format(title=f"Average Job Offers Key Note – {selected_level}", text=note_line), unsafe_allow_html=True)
