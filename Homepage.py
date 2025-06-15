@@ -1,96 +1,52 @@
 import streamlit as st
-from PIL import Image
+import pandas as pd
+import plotly.express as px
 
-# ==== Page Config ====
-st.set_page_config(
-    page_title="Education Career Success",
-    layout="wide"
-)
+# === Load data ===
+df = pd.read_csv("data/your_dataset.csv")  # thay bằng đường dẫn dữ liệu thực tế
 
-# ==== Apply global styles (Inter font + sidebar color) ====
-from utils import apply_global_styles
-apply_global_styles()
+st.title("📊 Dataset Overview")
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+st.markdown("Use the filters below to explore the dataset interactively:")
 
-local_css("style/style.css")
+# === Sidebar Filters ===
+with st.sidebar:
+    st.header("🔍 Filters")
 
-# ==== Import Google Fonts + Fade-in CSS ====
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
-    <style>
-        .fade-in {
-            animation: fadeIn 1.5s ease-in;
-        }
-        @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
-        }
-    </style>
-""", unsafe_allow_html=True)
+    gender_options = df["gender"].dropna().unique()
+    selected_gender = st.multiselect("Select Gender(s):", gender_options, default=gender_options)
 
-# ==== HEADER ====
-st.markdown("""
-    <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
-        <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
-            EDUCATION<br>CAREER<br>SUCCESS
-        </h1>
-    </div>
-""", unsafe_allow_html=True)
+    age_range = (int(df["age"].min()), int(df["age"].max()))
+    selected_age = st.slider("Select Age Range:", min_value=age_range[0], max_value=age_range[1], value=age_range)
 
-# ==== SLOGAN ====
-st.markdown("""
- <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
-    <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
-        Insight into success, powered by data.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
-        Discover how different factors shape career paths—through interactive analytics.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
-        Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Seven.py</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
-    </p>
- </div>
-""", unsafe_allow_html=True)
+    education_levels = df["education_level"].dropna().unique()
+    selected_edu = st.multiselect("Select Education Level(s):", education_levels, default=education_levels)
 
-# ==== OUR TEAM Title ====
-st.markdown("""
-    <div style='text-align: center; font-size: 36px; font-family: "Bungee", sans-serif; color: black; margin-top: 1rem; margin-bottom: 2rem;'>
-        OUR TEAM
-    </div>
-""", unsafe_allow_html=True)
-
-# ==== TEAM MEMBERS ====
-team_members = [
-    {"name": "Nguyễn Kiều Anh", "image": "image/Nguyen Kieu Anh.png"},
-    {"name": "Lê Nguyễn Khánh Phương", "image": "image/Le Nguyen Khanh Phuong.png"},
-    {"name": "Nguyễn Bảo Ngọc", "image": "image/Nguyen Bao Ngoc.png"},
-    {"name": "Nguyễn Trần Khánh Linh", "image": "image/Nguyen Tran Khanh Linh.png"},
-    {"name": "Nguyễn Huỳnh Bảo Nguyên", "image": "image/Nguyen Huynh Bao Nguyen.png"},
-    {"name": "Vũ Thị Thu Thảo", "image": "image/Vu Thi Thu Thao.png"},
-    {"name": "Nguyễn Bội Ngọc", "image": "image/Nguyen Boi Ngoc.png"},
+# === Apply Filters ===
+filtered_df = df[
+    (df["gender"].isin(selected_gender)) &
+    (df["age"].between(selected_age[0], selected_age[1])) &
+    (df["education_level"].isin(selected_edu))
 ]
 
-# ==== Top row ====
-top_row = team_members[:4]
-cols_top = st.columns(len(top_row))
-for col, member in zip(cols_top, top_row):
-    with col:
-        st.image(member["image"], width=250)
-        st.markdown(
-            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
-            unsafe_allow_html=True
-        )
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-# ==== Bottom row ====
-bottom_row = team_members[4:]
-cols_bot = st.columns([1, 3, 3, 3, 1])  # center 3 members
-for i, member in enumerate(bottom_row):
-    with cols_bot[i + 1]:
-        st.image(member["image"], width=300)
-        st.markdown(
-            f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
-            unsafe_allow_html=True
-        )
+# === Quick Stats ===
+st.subheader("📌 Quick Statistics")
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Records", len(filtered_df))
+col2.metric("Avg. Income", f"${filtered_df['income'].mean():,.0f}" if not filtered_df.empty else "N/A")
+col3.metric("Unique Education Levels", filtered_df["education_level"].nunique())
+
+# === Optional: Small chart (e.g., education count) ===
+fig = px.bar(filtered_df["education_level"].value_counts().reset_index(),
+             x="index", y="education_level", labels={"index": "Education Level", "education_level": "Count"},
+             title="Distribution by Education Level")
+st.plotly_chart(fig, use_container_width=True)
+
+# === Show Filtered Data Table ===
+st.subheader("📄 Filtered Dataset")
+st.dataframe(filtered_df, use_container_width=True)
+
+# === Optional: Download CSV ===
+csv = filtered_df.to_csv(index=False).encode("utf-8")
+st.download_button("📥 Download Filtered Data", data=csv, file_name="filtered_data.csv", mime="text/csv")
