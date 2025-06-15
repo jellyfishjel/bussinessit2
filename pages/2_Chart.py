@@ -131,6 +131,26 @@ pie1_notes = {
     """
 }
 
+# ➕ New: Field of Study Notes
+field_notes = {
+    "Entry": """
+        - Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.<br>
+        - Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.
+    """,
+    "Executive": """
+        - Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.<br>
+        - Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level.
+    """,
+    "Mid": """
+        - Average age ranges from 25–27, with Computer Science and Law showing the highest density.<br>
+        - Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.
+    """,
+    "Senior": """
+        - Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.<br>
+        - Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.
+    """
+}
+
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
@@ -240,11 +260,8 @@ with graph_tab[0]:
                 showlegend=True
             )
             st.plotly_chart(fig_donut, use_container_width=True)
-            
-            # Add dual note boxes below the two charts
-            note_density1 = density1_notes.get(selected_level, "No specific notes available for this level.")
-            note_pie1 = pie1_notes.get(selected_level, "No specific notes available for this level.")
-            
+
+            # Note style
             note_style = """
             <div style="
                 background-color: #FADADD;
@@ -263,14 +280,19 @@ with graph_tab[0]:
                 </div>
             </div>
             """
-            
+
             note_col1, note_col2 = st.columns(2)
-            
+
             with note_col1:
-                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=note_density1), unsafe_allow_html=True)
-            
+                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=density1_notes.get(selected_level, "")), unsafe_allow_html=True)
+
             with note_col2:
-                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=note_pie1), unsafe_allow_html=True)
+                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=pie1_notes.get(selected_level, "")), unsafe_allow_html=True)
+
+            # ➕ Extra note if Field of Study selected
+            if chart_option == 'Field of Study':
+                field_note = field_notes.get(selected_level, "No specific notes available for this level.")
+                st.markdown(note_style.format(title=f"Field of Study Key Note – {selected_level}", text=field_note), unsafe_allow_html=True)
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
