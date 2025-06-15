@@ -207,21 +207,39 @@ job_level_notes = {
     "Entry": """
         - Majority of individuals across all ages do not pursue entrepreneurship.<br>
         - A slight increase in entrepreneurial interest is seen between ages 21–23.<br>
-        - After age 23, the entrepreneurship rate stabilizes with minor fluctuations.<br>
-        - Age appears to have limited influence on entrepreneurship decisions in entry-level groups.
     """,
-    "Mid": "Mid-level professionals typically receive more offers and may begin considering starting their own ventures.",
-    "Senior": "Senior-level roles see more consistent job offers and may shift focus from entrepreneurship to mentorship or leadership.",
-    "Manager": "Managers show a balanced trend between job stability and entrepreneurial aspirations.",
-    "Executive": "Executives tend to receive fewer job offers but are more likely to engage in entrepreneurship based on strategic vision."
+    "Mid": """
+        - Entrepreneurship participation remains relatively steady, with slight increases around age 21–23.<br>
+        - Majority still fall under the non-entrepreneurship group across all ages.
+    """,
+    "Senior": """
+        A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).<br>
+        Proportion of entrepreneurs is more prominent than in mid and entry levels.
+    """,
+    "Executive": """
+        Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.<br>
+        Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.
+    """
 }
 
 job_offers_notes = {
-    "Entry": "Job offers are lower for fresh graduates, with entrepreneurship interest still forming.",
-    "Mid": "Job offers increase steadily; some begin side businesses.",
-    "Senior": "Seniors receive stable offers and may act as advisors.",
-    "Manager": "Managers juggle leadership roles and may explore startup ideas.",
-    "Executive": "Executives have fewer but high-value offers, often founding startups or investing."
+    "Entry": """
+        - Individuals with entrepreneurial intentions generally receive more job offers, especially at ages 18, 26, and 28.<br>
+        - Entrepreneurial individuals maintain a more stable or slightly upward trend in offers.<br>
+    """,
+    "Mid": """
+        - Highest job offer spike for entrepreneurs occurs around age 27.<br>
+        - Despite fluctuations, the difference in job offers between groups is generally narrow (within ~0.5).
+    """,
+    "Senior": """
+        Sharp spike for entrepreneurs at age 29 indicates potential late-career success.<br>
+        Entrepreneurs face more volatility in job offers, suggesting high risk–high reward dynamics at senior levels.
+    """,
+    "Executive": """
+        Peak job offers for entrepreneurs occur around age 27, suggesting growing opportunities with age.<br>
+        Fluctuations in entrepreneurial job offers imply less stability compared to non-entrepreneurs.
+        
+    """
 }
 
 with graph_tab[1]:
