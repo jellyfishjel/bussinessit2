@@ -23,7 +23,7 @@ st.markdown("""
 
 
 # === Load .py File Dynamically ===
-uploaded_file = st.text_input("Enter Python filename", value="Chart.py")
+uploaded_file = st.text_input("Enter Python filename", value="pages/2_Chart.py")
 
 
 try:
