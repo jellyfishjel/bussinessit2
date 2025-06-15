@@ -15,9 +15,11 @@ def apply_global_styles():
                 color: #333 !important;
             }
                 
-            .stCheckbox > div > label > div:first-child {
-                border-color: #FF6F00 !important;
-                background-color: #FF6F00 !important;
+                /* Gender multiselect tags */
+             [data-baseweb="tag"] {
+                background-color: #FFA726 !important;
+                color: white !important;
+                font-weight: 500;
             }
     </style>
         </style>
