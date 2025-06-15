@@ -35,6 +35,8 @@ def apply_global_styles():
             [data-testid="stMetricValue"] {
                 color: #333 !important;
             }
-
+            [data-testid="stMetricLabel"] {
+                    color: #666 !important;
+            }
         </style>
     """, unsafe_allow_html=True)
