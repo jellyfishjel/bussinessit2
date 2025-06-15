@@ -196,7 +196,6 @@ with graph_tab[0]:
                             y=-0.35,
                             xanchor="center",
                             x=0.5,
-                            font=dict(color='#333')
                         )
                     )
                     
