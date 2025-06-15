@@ -25,7 +25,7 @@ def apply_global_styles():
             /* Phần hiển thị đã chọn */
             div[data-baseweb="select"] > div {
                 background-color: #FFF3E0 !important;  /* nền cam pastel */
-                border: 2px solid #FF6F00 !important;  /* viền cam */
+                border: 2px solid #cf5a2e !important;  /* viền cam */
                 color: #333 !important;
             }
         </style>
