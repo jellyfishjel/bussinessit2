@@ -35,17 +35,15 @@ with tab1:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📌 Introduction</h1>
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
-        <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship
-        between academic background, career progression, and financial outcomes. By delving into various
-        categories of this dataset, we can uncover valuable insights into how different fields of study,
-        academic performance, and practical experiences impact career satisfaction, work-life balance, and
-        long-term professional achievements.</p>
+        <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship between 
+        academic background, career progression, and financial outcomes. By delving into various categories of this 
+        dataset, we can uncover valuable insights into how different fields of study, academic performance, and practical 
+        experiences impact career satisfaction, work-life balance, and long-term professional achievements.</p>
     
         
-        <p>This report is our project for R for Data Science course. The report contains plots that are created
-        by using RStudio to visualize information from the dataset in a more accessible way. Each diagram
-        is followed by a detailed description and code from RStudio to provide readers with clear
-        explanation on statistical data and how RStudio is used in practical data analysis.</p>
+        <p>This website is our project for the Python course. The website contains interactive graphs that are created by 
+        using Python language to visualize information from the dataset in a more accessible way. We utilized popular Python l
+        ibraries such as Pandas, Matplotlib, and Seaborn to extract, analyze, and present our findings effectively.</p>
         </div>
     """, unsafe_allow_html=True)
 
