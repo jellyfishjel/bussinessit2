@@ -237,7 +237,6 @@ with graph_tab[0]:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_density, use_container_width=True)
-
 with col2:
     group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
     pie_data = df_demo[group_col].value_counts().reset_index()
