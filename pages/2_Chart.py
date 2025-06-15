@@ -280,19 +280,30 @@ with graph_tab[0]:
                 </div>
             </div>
             """
-
-            note_col1, note_col2 = st.columns(2)
-
-            with note_col1:
-                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=density1_notes.get(selected_level, "")), unsafe_allow_html=True)
-
-            with note_col2:
-                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=pie1_notes.get(selected_level, "")), unsafe_allow_html=True)
-
-            # ➕ Extra note if Field of Study selected
-            if chart_option == 'Field of Study':
+            
+            # ✳️ Chỉ hiện ghi chú tương ứng với chart_option
+            if chart_option == 'Gender Distribution':
+                note_col1, note_col2 = st.columns(2)
+            
+                with note_col1:
+                    st.markdown(note_style.format(
+                        title=f"Age Distribution Key Note – {selected_level}",
+                        text=density1_notes.get(selected_level, "")
+                    ), unsafe_allow_html=True)
+            
+                with note_col2:
+                    st.markdown(note_style.format(
+                        title=f"Gender Distribution Key Note – {selected_level}",
+                        text=pie1_notes.get(selected_level, "")
+                    ), unsafe_allow_html=True)
+            
+            elif chart_option == 'Field of Study':
                 field_note = field_notes.get(selected_level, "No specific notes available for this level.")
-                st.markdown(note_style.format(title=f"Field of Study Key Note – {selected_level}", text=field_note), unsafe_allow_html=True)
+                st.markdown(note_style.format(
+                    title=f"Field of Study Key Note – {selected_level}",
+                    text=field_note
+                ), unsafe_allow_html=True)
+
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
