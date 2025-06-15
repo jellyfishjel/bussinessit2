@@ -5,73 +5,67 @@ import plotly.graph_objects as go
 from scipy.stats import gaussian_kde
 import numpy as np
 
-st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+# ==== Page Config ====
+st.set_page_config(page_title="Education Career App", layout="wide")
 
-from utils import apply_global_styles
-apply_global_styles()
-
-st.markdown("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif !important;
-        color: #52504d;
-        font-size: 15px;
-    }
-
-    .main-title {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #222;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
+# ==== Local CSS ====
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
 local_css("style/style.css")
 
+# ==== Load Data ====
 @st.cache_data
 def load_data():
     return pd.read_excel("education_career_success.xlsx")
 
 df = load_data()
 
+# ==== Note Style (Fix vị trí) ====
+note_style = """
+<div style="
+    background-color: #FADADD;
+    border-left: 6px solid #FB607F;
+    padding: 18px 22px;
+    margin-top: 50px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+">
+    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+        📌 {title}
+    </div>
+    <div style="font-size: 14px; color: #444;">
+        {text}
+    </div>
+</div>
+"""
 
-# Sidebar Filters
+# ==== Sidebar Filters ====
 st.sidebar.title("Filters")
 
-# Gender Filter - Multiselect
 gender_options = sorted(df['Gender'].dropna().unique())
 selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, default=gender_options)
 
-# Handle Gender Filter
 if not selected_genders:
     st.sidebar.warning("⚠️ No gender selected. Using full data. Please choose at least one option.")
-    gender_filtered = df  # fallback to full data to avoid crash
+    gender_filtered = df
 elif 'All' in selected_genders:
     gender_filtered = df
 else:
     gender_filtered = df[df['Gender'].isin(selected_genders)]
 
-# Job Level Filter
 job_levels = sorted(df['Current_Job_Level'].dropna().unique())
 selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
 
-# Age Filter
 min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
 age_range = st.sidebar.slider("Select Age Range", min_value=min_age, max_value=max_age, value=(min_age, max_age))
 
-# Check if only one age selected
 if age_range[0] == age_range[1]:
     st.sidebar.warning(f"⚠️ Only one age ({age_range[0]}) selected. Using full age range.")
     age_range = (min_age, max_age)
 
-# Entrepreneurship Status Filter - Individual Checkboxes
 st.sidebar.markdown("**Select Entrepreneurship Status**")
 show_yes = st.sidebar.checkbox("Yes", value=True)
 show_no = st.sidebar.checkbox("No", value=True)
@@ -88,11 +82,10 @@ if not (show_yes or show_no):
 
 color_map = {'Yes': '#FFD700', 'No': '#004080'}
 
-# Main Tabs
+# ==== Tab Setup ====
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
-# === TAB 1 (Demographics) ===
-
+# ==== Notes ====
 density1_notes = {
     "Entry": """
         - Most individuals fall between ages 22–25, consistent with recent graduates starting careers.<br>
@@ -131,7 +124,6 @@ pie1_notes = {
     """
 }
 
-# ➕ New: Field of Study Notes
 field_notes = {
     "Entry": """
         - Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.<br>
@@ -151,6 +143,7 @@ field_notes = {
     """
 }
 
+# ==== TAB 1 ====
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
@@ -266,40 +259,17 @@ with graph_tab[0]:
             )
             st.plotly_chart(fig_donut, use_container_width=True)
 
-            # Note style
-            note_style = """
-            <div style="
-                background-color: #FADADD;
-                border-left: 6px solid #FB607F;
-                padding: 18px 22px;
-                margin-top: 50px;
-                border-radius: 12px;
-                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-                font-family: 'Segoe UI', sans-serif;
-            ">
-                <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
-                    📌 {title}
-                </div>
-                <div style="font-size: 14px; color: #444;">
-                    {text}
-                </div>
-            </div>
-            """
-            
-            # ✳️ Chỉ hiện ghi chú tương ứng với chart_option
             if chart_option == 'Gender Distribution':
                 st.markdown(note_style.format(
                     title=f"Gender Distribution Key Note – {selected_level}",
                     text=pie1_notes.get(selected_level, "")
                 ), unsafe_allow_html=True)
-
             elif chart_option == 'Field of Study':
                 st.markdown(note_style.format(
                     title=f"Field of Study Key Note – {selected_level}",
                     text=field_notes.get(selected_level, "")
                 ), unsafe_allow_html=True)
-            
- 
+
 
 
 # === TAB 2 (Job Offers) ===
