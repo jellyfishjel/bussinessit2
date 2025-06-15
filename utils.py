@@ -36,7 +36,7 @@ def apply_global_styles():
                 color: #333 !important;
             }
             [data-testid="stMetricLabel"] {
-                    color: #666 !important;
+                    color: #333 !important;
             }
         </style>
     """, unsafe_allow_html=True)
