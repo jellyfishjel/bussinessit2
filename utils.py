@@ -31,5 +31,8 @@ def apply_global_styles():
                 background-color: #FF6F00 !important;
                 box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.2) !important;  /* hiệu ứng glow */
             }
+            .rc-slider-rail {
+                background-color: #FFE0B2 !important;  /* Cam nhạt */
+            }
         </style>
     """, unsafe_allow_html=True)
