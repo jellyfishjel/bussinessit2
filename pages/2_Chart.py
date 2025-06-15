@@ -397,7 +397,7 @@ with graph_tab[1]:
             <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
                 📌 {title}
             </div>
-            <div style="font-size: 12px; color: #444;">
+            <div style="font-size: 14px; color: #444;">
                 {text}
             </div>
         </div>
