@@ -1,33 +1,32 @@
 import pandas as pd
 import streamlit as st
 
-# Load dataset
+# ==== Page Config (nên đặt ở đầu) ====
+st.set_page_config(page_title="Education & Career Success", layout="wide")
+
+# ==== Load dataset with caching ====
 @st.cache_data
 def load_data():
     return pd.read_excel("education_career_success.xlsx")
 
 df = load_data()
 
-
-# Page config
-st.set_page_config(page_title="Education & Career Success", layout="wide")
-
-# ==== Apply global styles (Inter font + sidebar color) ====
+# ==== Apply global styles ====
 from utils import apply_global_styles
 apply_global_styles()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+# ==== Inject custom CSS & Google Fonts ====
+def inject_styles():
+    with open("style/style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    st.markdown(
+        '<link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">',
+        unsafe_allow_html=True
+    )
 
-local_css("style/style.css")
+inject_styles()
 
-# Google Fonts
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
-""", unsafe_allow_html=True)
-
-# Tab navigation
+# ==== Tab Navigation ====
 tab1, tab2, tab3 = st.tabs(["📌 Introduction", "📂 Dataset Overview", "📊 Variable Explanation"])
 
 # === TAB 1: INTRODUCTION ===
@@ -37,13 +36,11 @@ with tab1:
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
         <p>The <b>“Education Career Success”</b> dataset provides valuable insights into the relationship between 
         academic background, career progression, and financial outcomes. By delving into various categories of this 
-        dataset, we can uncover valuable insights into how different fields of study, academic performance, and practical 
-        experiences impact career satisfaction, work-life balance, and long-term professional achievements.</p>
+        dataset, we can uncover how different fields of study, academic performance, and practical 
+        experiences impact career satisfaction and long-term professional achievements.</p>
     
-        
-        <p>This website is our project for the Python course. The website contains interactive graphs that are created by 
-        using Python language to visualize information from the dataset in a more accessible way. We utilized popular Python 
-        libraries such as Pandas, Matplotlib, and Seaborn to extract, analyze, and present our findings effectively.</p>
+        <p>This website is a project for our Python course. It contains interactive graphs that visualize information 
+        from the dataset using Python libraries such as Pandas and Plotly.</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -55,11 +52,6 @@ with tab2:
         <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
             <p>This dataset has <b>20 columns</b> and <b>5000 rows</b>, exploring the relationship between academic performance and career success.
             It includes students’ educational backgrounds, skills, and outcomes.</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div style="font-family: 'Inter', sans-serif; font-size: 17px; color: #333; line-height: 1.6;">
             <p>The dataset can be used to:</p>
             <ul style="margin-left: 20px;">
                 <li>Predict job success based on education</li>
@@ -76,10 +68,7 @@ with tab2:
 with tab3:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Variable Explanation</h1>
-    """, unsafe_allow_html=True)
 
-    # 1. Student Info
-    st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #333;'>1. Student Information</h3>
         <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Student_ID</code>: Unique identifier for each student</li>
@@ -91,10 +80,7 @@ with tab3:
             <li><code>University_GPA</code>: GPA in university (2.0–4.0)</li>
             <li><code>Field_of_Study</code>: Major field (Arts, Law, Business, etc.)</li>
         </ul>
-    """, unsafe_allow_html=True)
 
-    # 2. Academic Performance
-    st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #333;'>2. Academic Performance</h3>
         <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Internships_Completed</code>: Number of internships (0–4)</li>
@@ -103,10 +89,7 @@ with tab3:
             <li><code>Soft_Skills_Score</code>: Soft skills rating (1–10)</li>
             <li><code>Networking_Score</code>: Connections/networking score (1–10)</li>
         </ul>
-    """, unsafe_allow_html=True)
 
-    # 3. Career Outcomes
-    st.markdown("""
         <h3 style='font-family: Inter, sans-serif; color: #333;'>3. Career Outcomes</h3>
         <ul style="margin-left: 20px; font-family: Inter, sans-serif; color: #333; font-size: 16px;">
             <li><code>Job_Offers</code>: Number of job offers after graduation (0–5)</li>
