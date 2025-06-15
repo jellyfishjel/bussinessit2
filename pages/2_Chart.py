@@ -168,38 +168,18 @@ with graph_tab[0]:
                         name=str(cat),
                         fill='tozeroy'
                     ))
-                    
-                    fig_density.update_layout(
-                        template=None,
-                        paper_bgcolor='rgba(0,0,0,0)',
-                        plot_bgcolor='rgba(0,0,0,0)',
-                        title=dict(
-                            text=title,
-                            font=dict(color='#333')
-                        ),
-                        font=dict(color='#333'),  # Áp dụng cho ticks, legends nếu chưa custom riêng
-                        xaxis=dict(
-                            title="Age",
-                            titlefont=dict(color='#333'),
-                            tickfont=dict(color='#333')
-                        ),
-                        yaxis=dict(
-                            title="Density",
-                            titlefont=dict(color='#333'),
-                            tickfont=dict(color='#333')
-                        ),
-                        height=500,
-                        margin=dict(t=40, l=40, r=40, b=80),
-                        legend=dict(
-                            orientation="h",
-                            yanchor="bottom",
-                            y=-0.35,
-                            xanchor="center",
-                            x=0.5,
-                            font=dict(color='#333')
-                        )
-                    )
-                    
+
+            fig_density.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                title=dict(text=title, font=dict(color='#333')),
+                font=dict(color='#333'),
+                xaxis_title="Age",
+                yaxis_title="Density",
+                height=500,
+                margin=dict(t=40, l=40, r=40, b=80),
+                legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
+            )
             st.plotly_chart(fig_density, use_container_width=True)
 
         with col2:
