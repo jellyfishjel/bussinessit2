@@ -32,7 +32,7 @@ def apply_global_styles():
             [data-testid="stMetricLabel"] {
                     color: #333 !important;
             }
-            label, span {
+            label, p {
                 color: #333 !important;
             }
         </style>
