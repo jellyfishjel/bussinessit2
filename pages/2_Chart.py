@@ -210,15 +210,15 @@ job_level_notes = {
     """,
     "Mid": """
         - Entrepreneurship participation remains relatively steady, with slight increases around age 21–23.<br>
-        - Majority still fall under the non-entrepreneurship group across all ages.
+        - Majority still fall under the non-entrepreneurship group across all ages.<br>
     """,
     "Senior": """
-        A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).<br>
-        Proportion of entrepreneurs is more prominent than in mid and entry levels.
+        - A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).<br>
+        - Proportion of entrepreneurs is more prominent than in mid and entry levels.<br>
     """,
     "Executive": """
-        Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.<br>
-        Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.
+        - Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.<br>
+        - Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.<br>
     """
 }
 
@@ -229,16 +229,15 @@ job_offers_notes = {
     """,
     "Mid": """
         - Highest job offer spike for entrepreneurs occurs around age 27.<br>
-        - Despite fluctuations, the difference in job offers between groups is generally narrow (within ~0.5).
+        - Despite fluctuations, the difference in job offers between groups is generally narrow (within ~0.5).<br>
     """,
     "Senior": """
-        Sharp spike for entrepreneurs at age 29 indicates potential late-career success.<br>
-        Entrepreneurs face more volatility in job offers, suggesting high risk–high reward dynamics at senior levels.
+        - Sharp spike for entrepreneurs at age 29 indicates potential late-career success.<br>
+        - Entrepreneurs face more volatility in job offers, suggesting high risk–high reward dynamics at senior levels.<br>
     """,
     "Executive": """
-        Peak job offers for entrepreneurs occur around age 27, suggesting growing opportunities with age.<br>
-        Fluctuations in entrepreneurial job offers imply less stability compared to non-entrepreneurs.
-        
+        - Peak job offers for entrepreneurs occur around age 27, suggesting growing opportunities with age.<br>
+        - Fluctuations in entrepreneurial job offers imply less stability compared to non-entrepreneurs.<br>
     """
 }
 
