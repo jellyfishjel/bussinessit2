@@ -254,6 +254,10 @@ with graph_tab[0]:
                 border-radius: 12px;
                 box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
                 font-family: 'Segoe UI', sans-serif;
+                min-height: 180px; /* 👈 đảm bảo chiều cao tối thiểu giống nhau */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
             ">
                 <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
                     📌 {title}
@@ -263,14 +267,6 @@ with graph_tab[0]:
                 </div>
             </div>
             """
-            
-            note_col1, note_col2 = st.columns(2)
-            
-            with note_col1:
-                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=note_density1), unsafe_allow_html=True)
-            
-            with note_col2:
-                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=note_pie1), unsafe_allow_html=True)
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
