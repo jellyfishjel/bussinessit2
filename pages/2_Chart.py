@@ -203,37 +203,27 @@ with graph_tab[0]:
             st.plotly_chart(fig_donut, use_container_width=True)
 
 # === TAB 2 (Job Offers) ===
-job_level_notes = {
+note_bar_dict = {
     "Entry": """
-    <ul style="margin: 0; padding-left: 20px;">
-        <li>Majority of individuals across all ages do not pursue entrepreneurship.</li>
-        <li>A slight increase in entrepreneurial interest is seen between ages 21–23.</li>
-    </ul>
+        Majority of individuals across all ages do not pursue entrepreneurship.<br>
+        A slight increase in entrepreneurial interest is seen between ages 21–23.<br>
+        After age 23, the entrepreneurship rate stabilizes with minor fluctuations.<br>
+        Age appears to have limited influence on entrepreneurship decisions in entry-level groups.
     """,
     "Mid": """
-    <ul style="margin: 0; padding-left: 20px;">
-        <li>Entrepreneurship participation remains relatively steady, with slight increases around age 21–23.</li>
-        <li>Majority still fall under the non-entrepreneurship group across all ages.</li>
-    </ul>
+        Entrepreneurship participation remains relatively steady, with slight increases around age 21–23.<br>
+        Majority still fall under the non-entrepreneurship group across all ages.
     """,
     "Senior": """
-    <ul style="margin: 0; padding-left: 20px;">
-        <li>A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).</li>
-        <li>Proportion of entrepreneurs is more prominent than in mid and entry levels.</li>
-    </ul>
-    """,
-    "Manager": """
-    <ul style="margin: 0; padding-left: 20px;">
-        <li>No specific note provided yet.</li>
-    </ul>
+        A fairly balanced distribution between entrepreneurs and non-entrepreneurs, with some age groups showing higher entrepreneurship (e.g., age 29).<br>
+        Proportion of entrepreneurs is more prominent than in mid and entry levels.
     """,
     "Executive": """
-    <ul style="margin: 0; padding-left: 20px;">
-        <li>Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.</li>
-        <li>Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.</li>
-    </ul>
+        Entrepreneurship (Yes) fluctuates across ages, with no clear increasing or decreasing pattern.<br>
+        Ages 20–22 show a relatively higher proportion of entrepreneurship compared to other ages.
     """
 }
+
 
 job_offers_notes = {
     "Entry": "Job offers are lower for fresh graduates, with entrepreneurship interest still forming.",
@@ -382,7 +372,7 @@ with graph_tab[1]:
         with col2:
             st.plotly_chart(fig_line, use_container_width=True)
         # Add dual note boxes below the two charts
-        note_bar = job_level_notes.get(selected_level, "No specific notes available for this level.")
+        note_bar = note_bar_dict[selected_level]
         note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
         
         note_style = """
