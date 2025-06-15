@@ -89,16 +89,16 @@ graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # Descriptions by level
 gender_desc = {
-    'Entry-Level': "- Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.\n- Female and male participation rates are the highest at this level, indicating wide entry into the workforce.",
-    'Mid-Level': "- Male proportion slightly increases, showing a potential gender gap in career progression.\n- Female representation remains relatively high, but slightly lower than entry-level.",
-    'Senior-Level': "- Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.\n- The total number is smaller, suggesting fewer people reach this stage.",
-    'Executive-Level': "- Males dominate this level, revealing a strong gender imbalance at the top.\n- Female and other gender groups are significantly underrepresented."
+    'Entry': "- Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.\n- Female and male participation rates are the highest at this level, indicating wide entry into the workforce.",
+    'Mid': "- Male proportion slightly increases, showing a potential gender gap in career progression.\n- Female representation remains relatively high, but slightly lower than entry-level.",
+    'Senior': "- Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.\n- The total number is smaller, suggesting fewer people reach this stage.",
+    'Executive': "- Males dominate this level, revealing a strong gender imbalance at the top.\n- Female and other gender groups are significantly underrepresented."
 }
 field_desc = {
-    'Entry-Level': "- Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.\n- Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.",
-    'Mid-Level': "- Average age ranges from 25–27, with Computer Science and Law showing the highest density.\n- Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.",
-    'Senior-Level': "- Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.\n- Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.",
-    'Executive-Level': "- Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.\n- Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level."
+    'Entry': "- Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.\n- Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.",
+    'Mid': "- Average age ranges from 25–27, with Computer Science and Law showing the highest density.\n- Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.",
+    'Senior': "- Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.\n- Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.",
+    'Executive: "- Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.\n- Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level."
 }
 
 # === TAB 1 (Demographics) ===
