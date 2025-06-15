@@ -381,13 +381,15 @@ with graph_tab[1]:
             st.plotly_chart(fig_line, use_container_width=True)
             
         # Add dual note boxes below the two charts
-        with st.expander("📌 Key Notes for Entrepreneurship Distribution and Job Offers", expanded=False):
+        note_bar = job_level_notes.get(selected_level, "No specific notes available for this level.")
+        note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
+        
         note_style = """
         <div style="
             background-color: #fff4ec;
             border-left: 6px solid #cf5a2e;
             padding: 18px 22px;
-            margin-top: 10px;
+            margin-top: 25px;
             border-radius: 12px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
             font-family: 'Segoe UI', sans-serif;
@@ -400,26 +402,11 @@ with graph_tab[1]:
             </div>
         </div>
         """
-    
-        note_bar = job_level_notes.get(selected_level, "No specific notes available for this level.")
-        note_line = job_offers_notes.get(selected_level, "No specific notes available for this level.")
-    
+        
         note_col1, note_col2 = st.columns(2)
-    
+        
         with note_col1:
-            st.markdown(
-                note_style.format(
-                    title=f"Entrepreneurship Distribution – {selected_level}",
-                    text=note_bar
-                ),
-                unsafe_allow_html=True
-            )
-    
+            st.markdown(note_style.format(title=f"Entrepreneurship Distribution Key Note – {selected_level}", text=note_bar), unsafe_allow_html=True)
+        
         with note_col2:
-            st.markdown(
-                note_style.format(
-                    title=f"Average Job Offers – {selected_level}",
-                    text=note_line
-                ),
-                unsafe_allow_html=True
-            )
+            st.markdown(note_style.format(title=f"Average Job Offers Key Note – {selected_level}", text=note_line), unsafe_allow_html=True)
