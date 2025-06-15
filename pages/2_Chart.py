@@ -245,18 +245,16 @@ with graph_tab[0]:
             note_density1 = density1_notes.get(selected_level, "No specific notes available for this level.")
             note_pie1 = pie1_notes.get(selected_level, "No specific notes available for this level.")
             
-            note_style = '''
-            <div style="background-color: #fff4ec;
-                        border-left: 6px solid #cf5a2e;
-                        padding: 18px 22px;
-                        margin-top: 25px;
-                        border-radius: 12px;
-                        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-                        font-family: 'Segoe UI', sans-serif;
-                        min-height: 220px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-start;">
+            note_style = """
+            <div style="
+                background-color: #fff4ec;
+                border-left: 6px solid #cf5a2e;
+                padding: 18px 22px;
+                margin-top: 25px;
+                border-radius: 12px;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+                font-family: 'Segoe UI', sans-serif;
+            ">
                 <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
                     📌 {title}
                 </div>
@@ -264,7 +262,15 @@ with graph_tab[0]:
                     {text}
                 </div>
             </div>
-            '''
+            """
+            
+            note_col1, note_col2 = st.columns(2)
+            
+            with note_col1:
+                st.markdown(note_style.format(title=f"Age Distribution Key Note – {selected_level}", text=note_density1), unsafe_allow_html=True)
+            
+            with note_col2:
+                st.markdown(note_style.format(title=f"Gender Distribution Key Note – {selected_level}", text=note_pie1), unsafe_allow_html=True)
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
