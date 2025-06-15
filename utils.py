@@ -21,18 +21,12 @@ def apply_global_styles():
                 color: white !important;
                 font-color: white;
             }
-            .rc-slider-track {
-                background-color: #FF6F00 !important;  /* Cam đậm */
-            }
-
-            /* Tay cầm (nút tròn) */
-            .rc-slider-handle {
-                border-color: #FF6F00 !important;
-                background-color: #FF6F00 !important;
-                box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.2) !important;  /* hiệu ứng glow */
-            }
-            .rc-slider-rail {
-                background-color: #FFE0B2 !important;  /* Cam nhạt */
+            
+            /* Phần hiển thị đã chọn */
+            div[data-baseweb="select"] > div {
+                background-color: #FFF3E0 !important;  /* nền cam pastel */
+                border: 2px solid #FF6F00 !important;  /* viền cam */
+                color: #333 !important;
             }
         </style>
     """, unsafe_allow_html=True)
