@@ -35,5 +35,8 @@ def apply_global_styles():
             label, span, p {
                 color: #333 !important;
             }
+            [role="menuitem"], [role="menuitem"] span {
+                color: #cf5a2e !important;
+            }
         </style>
     """, unsafe_allow_html=True)
