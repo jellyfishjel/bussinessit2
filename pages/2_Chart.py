@@ -60,6 +60,7 @@ else:
 # Job Level Filter
 job_levels = sorted(df['Current_Job_Level'].dropna().unique())
 selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
+st.write(df['Current_Job_Level'].unique())
 
 # Age Filter
 min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
