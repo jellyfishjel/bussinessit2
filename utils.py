@@ -21,6 +21,15 @@ def apply_global_styles():
                 color: white !important;
                 font-color: white;
             }
-    </style>
+            .rc-slider-track {
+                background-color: #FF6F00 !important;  /* Cam đậm */
+            }
+
+            /* Tay cầm (nút tròn) */
+            .rc-slider-handle {
+                border-color: #FF6F00 !important;
+                background-color: #FF6F00 !important;
+                box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.2) !important;  /* hiệu ứng glow */
+            }
         </style>
     """, unsafe_allow_html=True)
