@@ -277,28 +277,28 @@ with graph_tab[0]:
         </div>
         """
 
-        note_col1, note_col2 = st.columns(2)
+        if chart_option == 'Gender Distribution':
+            note_col1, note_col2 = st.columns(2)
 
-        with note_col1:
-            st.markdown(
-                note_style.format(
-                    title=f"{chart_option} – Density Chart Insight ({selected_level})",
-                    text=gender_density_notes.get(selected_level, "No density notes available.") if chart_option == 'Gender Distribution' else ""
-                ),
-                unsafe_allow_html=True
-            )
+            with note_col1:
+                st.markdown(
+                    note_style.format(
+                        title=f"{chart_option} – Density Chart Insight ({selected_level})",
+                        text=gender_density_notes.get(selected_level, "No density notes available.") if chart_option == 'Gender Distribution' else ""
+                    ),
+                    unsafe_allow_html=True
+                )
 
-        with note_col2:
-            st.markdown(
-                note_style.format(
-                    title=f"{chart_option} – Pie Chart Insight ({selected_level})",
-                    text=gender_pie_notes.get(selected_level, "No pie chart notes available.") if chart_option == 'Gender Distribution' else ""
-                ),
-                unsafe_allow_html=True
-            )
+            with note_col2:
+                st.markdown(
+                    note_style.format(
+                        title=f"{chart_option} – Pie Chart Insight ({selected_level})",
+                        text=gender_pie_notes.get(selected_level, "No pie chart notes available.") if chart_option == 'Gender Distribution' else ""
+                    ),
+                    unsafe_allow_html=True
+                )
 
-        # Field of Study ghi chú riêng
-        if chart_option == 'Field of Study':
+        elif chart_option == 'Field of Study':
             st.markdown(
                 note_style.format(
                     title=f"Field of Study Insight – {selected_level}",
