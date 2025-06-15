@@ -41,7 +41,6 @@ def load_data():
 
 df = load_data()
 
-
 # Sidebar Filters
 st.sidebar.title("Filters")
 
@@ -52,7 +51,7 @@ selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, de
 # Handle Gender Filter
 if not selected_genders:
     st.sidebar.warning("⚠️ No gender selected. Using full data. Please choose at least one option.")
-    gender_filtered = df  # fallback to full data to avoid crash
+    gender_filtered = df
 elif 'All' in selected_genders:
     gender_filtered = df
 else:
@@ -66,23 +65,20 @@ selected_level = st.sidebar.selectbox("Select Job Level", job_levels)
 min_age, max_age = int(df['Age'].min()), int(df['Age'].max())
 age_range = st.sidebar.slider("Select Age Range", min_value=min_age, max_value=max_age, value=(min_age, max_age))
 
-# Check if only one age selected
 if age_range[0] == age_range[1]:
     st.sidebar.warning(f"⚠️ Only one age ({age_range[0]}) selected. Using full age range.")
     age_range = (min_age, max_age)
 
-# Entrepreneurship Status Filter - Individual Checkboxes
+# Entrepreneurship Status Filter
 st.sidebar.markdown("**Select Entrepreneurship Status**")
 show_yes = st.sidebar.checkbox("Yes", value=True)
 show_no = st.sidebar.checkbox("No", value=True)
-
 selected_statuses = []
 if show_yes:
     selected_statuses.append("Yes")
 if show_no:
     selected_statuses.append("No")
-
-if not (show_yes or show_no):
+if not selected_statuses:
     st.sidebar.warning("⚠️ No status selected. Using full data. Please choose at least one option.")
     selected_statuses = ['Yes', 'No']
 
@@ -91,66 +87,21 @@ color_map = {'Yes': '#FFD700', 'No': '#004080'}
 # Main Tabs
 graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
+# Descriptions by level
+gender_desc = {
+    'Entry-Level': "- Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.\n- Female and male participation rates are the highest at this level, indicating wide entry into the workforce.",
+    'Mid-Level': "- Male proportion slightly increases, showing a potential gender gap in career progression.\n- Female representation remains relatively high, but slightly lower than entry-level.",
+    'Senior-Level': "- Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.\n- The total number is smaller, suggesting fewer people reach this stage.",
+    'Executive-Level': "- Males dominate this level, revealing a strong gender imbalance at the top.\n- Female and other gender groups are significantly underrepresented."
+}
+field_desc = {
+    'Entry-Level': "- Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.\n- Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.",
+    'Mid-Level': "- Average age ranges from 25–27, with Computer Science and Law showing the highest density.\n- Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.",
+    'Senior-Level': "- Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.\n- Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.",
+    'Executive-Level': "- Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.\n- Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level."
+}
+
 # === TAB 1 (Demographics) ===
-
-density1_notes = {
-    "Entry": """
-        - Most individuals fall between ages 22–25, consistent with recent graduates starting careers.<br>
-        - The peak density shows a sharp entry age, suggesting a clear transition from education to employment.<br>
-    """,
-    "Mid": """
-        - Concentrated around ages 23–26, indicating this is a common stage for early career growth.<br>
-        - The curve shifts right compared to Entry, reflecting natural career progression.<br>
-    """,
-    "Senior": """
-        - Age distribution is flatter and slightly older (24–27), showing a range of career pacing.<br>
-        - The peak is less sharp, indicating diverse timing in reaching senior roles.<br>
-    """,
-    "Executive": """
-        - Surprisingly younger skew, with a peak at 22–25, suggesting some reach this level early, likely via entrepreneurship.<br>
-        - A broader spread indicates both early achievers and experienced individuals.<br>
-    """
-}
-
-pie1_notes = {
-    "Entry": """
-        - Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.<br>
-        - Female and male participation rates are the highest at this level, indicating wide entry into the workforce.<br>
-    """,
-    "Mid": """
-        - Male proportion slightly increases, showing a potential gender gap in career progression.<br>
-        - Female representation remains relatively high, but slightly lower than entry-level.<br>
-    """,
-    "Senior": """
-        - Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.<br>
-        - The total number is smaller, suggesting fewer people reach this stage.<br>
-    """,
-    "Executive": """
-        - Males dominate this level, revealing a strong gender imbalance at the top.<br>
-        - Female and other gender groups are significantly underrepresented.<br>
-    """
-}
-
-# ➕ New: Field of Study Notes
-field_notes = {
-    "Entry": """
-        - Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.<br>
-        - Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.
-    """,
-    "Executive": """
-        - Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.<br>
-        - Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level.
-    """,
-    "Mid": """
-        - Average age ranges from 25–27, with Computer Science and Law showing the highest density.<br>
-        - Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.
-    """,
-    "Senior": """
-        - Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.<br>
-        - Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.
-    """
-}
-
 with graph_tab[0]:
     st.markdown("""
         <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
@@ -167,48 +118,10 @@ with graph_tab[0]:
     if df_demo.empty:
         st.warning("⚠️ Not enough data to display charts. Please adjust the filters.")
     else:
-        if chart_option == 'Gender Distribution':
-            with st.container():
-                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Total Records</div>
-                            <div style="font-size: 28px;">{}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Median Age</div>
-                            <div style="font-size: 28px;">{:.1f}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">% Female</div>
-                            <div style="font-size: 28px;">{:.1f}%</div>
-                        </div>
-                    </div></div>
-                """.format(len(df_demo), df_demo['Age'].median(),
-                           (df_demo['Gender'] == 'Female').mean() * 100),
-                unsafe_allow_html=True)
-
-        else:
-            top_fields = df_demo['Field_of_Study'].value_counts().head(3).index.tolist()
-            display_fields = ", ".join(top_fields) if top_fields else "N/A"
-            with st.container():
-                st.markdown("""<div style="border: 2px solid #cf5a2e; border-radius: 12px; padding: 20px; margin-top: 10px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-                    <div style="display: flex; justify-content: space-around; text-align: center; line-height: 1.3;">
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Total Records</div>
-                            <div style="font-size: 28px;">{}</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 14px; color: #555;">Top 3 Fields</div>
-                            <div style="font-size: 20px;">{}</div>
-                        </div>
-                    </div></div>
-                """.format(len(df_demo), display_fields),
-                unsafe_allow_html=True)
-
         col1, col2 = st.columns(2)
 
         with col1:
+            # Density Chart
             fig_density = go.Figure()
             group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
             title = f"Age Distribution by {group_col.replace('_', ' ')}"
@@ -239,8 +152,17 @@ with graph_tab[0]:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_density, use_container_width=True)
+            
+            # Add Age-Chart Description
+            if chart_option == 'Gender Distribution':
+                st.markdown("### Age Distribution Insights")
+                st.markdown(gender_desc[selected_level])
+            else:
+                st.markdown("### Age Distribution Insights")
+                st.markdown(field_desc[selected_level])
 
         with col2:
+            # Donut/Pie Chart
             if chart_option == 'Gender Distribution':
                 counts = df_demo['Gender'].value_counts().reset_index()
                 counts.columns = ['Gender', 'Count']
@@ -254,55 +176,20 @@ with graph_tab[0]:
             fig_donut.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
-                title=f"{chart_option}",
+                title=f"{chart_option} Distribution (Donut Chart)",
                 height=350,
                 margin=dict(t=40, l=40, r=40, b=40),
                 showlegend=True
             )
             st.plotly_chart(fig_donut, use_container_width=True)
 
-            # Note style
-            note_style = """
-            <div style="
-                background-color: #FADADD;
-                border-left: 6px solid #FB607F;
-                padding: 18px 22px;
-                margin-top: 50px;
-                border-radius: 12px;
-                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-                font-family: 'Segoe UI', sans-serif;
-            ">
-                <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
-                    📌 {title}
-                </div>
-                <div style="font-size: 14px; color: #444;">
-                    {text}
-                </div>
-            </div>
-            """
-            
-            # ✳️ Chỉ hiện ghi chú tương ứng với chart_option
+            # Add Pie-Chart Description
+            st.markdown("### {0} Insights".format(chart_option))
             if chart_option == 'Gender Distribution':
-                note_col1, note_col2 = st.columns(2)
-            
-                with note_col1:
-                    st.markdown(note_style.format(
-                        title=f"Age Distribution Key Note – {selected_level}",
-                        text=density1_notes.get(selected_level, "")
-                    ), unsafe_allow_html=True)
-            
-                with note_col2:
-                    st.markdown(note_style.format(
-                        title=f"Gender Distribution Key Note – {selected_level}",
-                        text=pie1_notes.get(selected_level, "")
-                    ), unsafe_allow_html=True)
-            
-            elif chart_option == 'Field of Study':
-                field_note = field_notes.get(selected_level, "No specific notes available for this level.")
-                st.markdown(note_style.format(
-                    title=f"Field of Study Key Note – {selected_level}",
-                    text=field_note
-                ), unsafe_allow_html=True)
+                st.markdown(gender_desc[selected_level])
+            else:
+                st.markdown(field_desc[selected_level])
+
 
 
 # === TAB 2 (Job Offers) ===
