@@ -31,6 +31,10 @@ def apply_global_styles():
             [data-testid="metric-container"] {
                 color: #333 !important;
             }
+            /* Số trong metric */
+            [data-testid="stMetricValue"] {
+                color: #333 !important;
+            }
 
         </style>
     """, unsafe_allow_html=True)
