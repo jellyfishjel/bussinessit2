@@ -14,5 +14,11 @@ def apply_global_styles():
                 font-family: 'Inter', sans-serif !important;
                 color: #333 !important;
             }
+                
+            .stCheckbox > div > label > div:first-child {
+                border-color: #FF6F00 !important;
+                background-color: #FF6F00 !important;
+            }
+    </style>
         </style>
     """, unsafe_allow_html=True)
