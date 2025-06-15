@@ -45,6 +45,63 @@ df = load_data()
 # Sidebar Filters
 st.sidebar.title("Filters")
 
+gender_density_notes = {
+    "Entry": """
+        - Most individuals fall between ages 22–25, consistent with recent graduates starting careers.<br>
+        - The peak density shows a sharp entry age, suggesting a clear transition from education to employment.<br>
+    """,
+    "Mid": """
+        - Concentrated around ages 23–26, indicating this is a common stage for early career growth.<br>
+        - The curve shifts right compared to Entry, reflecting natural career progression.<br>
+    """,
+    "Senior": """
+        - Age distribution is flatter and slightly older (24–27), showing a range of career pacing.<br>
+        - The peak is less sharp, indicating diverse timing in reaching senior roles.<br>
+    """,
+    "Executive": """
+        - Surprisingly younger skew, with a peak at 22–25, suggesting some reach this level early, likely via entrepreneurship.<br>
+        - A broader spread indicates both early achievers and experienced individuals.<br>
+    """
+}
+
+gender_pie_notes = {
+    "Entry": """
+        - Gender distribution is nearly equal, suggesting balanced access to entry-level opportunities.<br>
+        - Female and male participation rates are the highest at this level, indicating wide entry into the workforce.<br>
+    """,
+    "Mid": """
+        - Male proportion slightly increases, showing a potential gender gap in career progression.<br>
+        - Female representation remains relatively high, but slightly lower than entry-level.<br>
+    """,
+    "Senior": """
+        - Gender representation becomes more balanced again, possibly reflecting equal long-term commitment.<br>
+        - The total number is smaller, suggesting fewer people reach this stage.<br>
+    """,
+    "Executive": """
+        - Males dominate this level, revealing a strong gender imbalance at the top.<br>
+        - Female and other gender groups are significantly underrepresented.<br>
+    """
+}
+field_of_study_notes = {
+    "Entry": """
+        - Entry-level individuals are mostly between ages 24–26, with peaks in Computer Science and Engineering.<br>
+        - Study field distribution is fairly balanced, with Mathematics leading, reflecting the general demand for STEM-related roles.<br>
+    """,
+    "Mid": """
+        - Average age ranges from 25–27, with Computer Science and Law showing the highest density.<br>
+        - Study fields are quite diverse, with Law and Business being the most prominent, reflecting varied career trajectories at this stage.<br>
+    """,
+    "Senior": """
+        - Senior-level participants have a wider age range, mostly around 24–26, particularly in Medicine and Business.<br>
+        - Engineering is the most common study field, while Computer Science is less frequent—possibly due to the higher seniority typically required in technical roles.<br>
+    """,
+    "Executive": """
+        - Age distribution is broader, peaking around 25–27; Law and Arts tend to have older participants.<br>
+        - Arts and Mathematics dominate the study fields, while Business and Engineering are less represented, indicating more specialized paths at this level.<br>
+    """
+}
+
+
 # Gender Filter - Multiselect
 gender_options = sorted(df['Gender'].dropna().unique())
 selected_genders = st.sidebar.multiselect("Select Gender(s)", gender_options, default=gender_options)
@@ -181,26 +238,57 @@ with graph_tab[0]:
             )
             st.plotly_chart(fig_density, use_container_width=True)
 
-        with col2:
-            if chart_option == 'Gender Distribution':
-                counts = df_demo['Gender'].value_counts().reset_index()
-                counts.columns = ['Gender', 'Count']
-                labels, values = counts['Gender'], counts['Count']
-            else:
-                counts = df_demo['Field_of_Study'].value_counts().reset_index()
-                counts.columns = ['Field of Study', 'Count']
-                labels, values = counts['Field of Study'], counts['Count']
+            #         === Notes ===
+            note_style = """
+            <div style="
+                background-color: #fff4ec;
+                border-left: 6px solid #cf5a2e;
+                padding: 18px 22px;
+                margin-top: 25px;
+                border-radius: 12px;
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+                font-family: 'Inter', sans-serif;
+            ">
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
+                    📌 {title}
+                </div>
+                <div style="font-size: 14px; color: #444;">
+                    {text}
+                </div>
+            </div>
+            """
 
-            fig_donut = go.Figure(data=[go.Pie(labels=labels, values=values, hole=0.5)])
-            fig_donut.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                title=f"{chart_option} Distribution (Donut Chart)",
-                height=350,
-                margin=dict(t=40, l=40, r=40, b=40),
-                showlegend=True
+
+            # Hiển thị Gender Notes
+            note_col1, note_col2 = st.columns(2)
+
+            with note_col1:
+                st.markdown(
+                    note_style.format(
+                        title=f"Gender – Density Chart Insight ({selected_level})",
+                        text=gender_density_notes.get(selected_level, "No density notes for this level.")
+                    ),
+                    unsafe_allow_html=True
+                )
+
+            with note_col2:
+                st.markdown(
+                    note_style.format(
+                        title=f"Gender – Pie Chart Insight ({selected_level})",
+                        text=gender_pie_notes.get(selected_level, "No pie chart notes for this level.")
+                ),
+                unsafe_allow_html=True
             )
-            st.plotly_chart(fig_donut, use_container_width=True)
+    
+        # Hiển thị Field of Study Notes
+            st.markdown(
+                    note_style.format(
+                        title=f"Field of Study Insight – {selected_level}",
+                        text=field_of_study_notes.get(selected_level, "No field of study notes for this level.")
+                ),
+                unsafe_allow_html=True
+            )
+
 
 # === TAB 2 (Job Offers) ===
 job_level_notes = {
