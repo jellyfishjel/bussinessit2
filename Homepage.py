@@ -91,3 +91,6 @@ for i, member in enumerate(bottom_row):
             f"<div style='text-align:center; font-family: \"Inter\", sans-serif; font-weight:bold; font-size:15px; color:black'>{member['name']}</div>",
             unsafe_allow_html=True
         )
+
+render_header()
+render_slogan()
