@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from scipy.stats import gaussian_kde
 import numpy as np
 
-st.set_page_config(page_title="Education & Career Success Dashboard", layout="wide")
+st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
 
 from utils import apply_global_styles
 apply_global_styles()
@@ -89,12 +89,12 @@ if not (show_yes or show_no):
 color_map = {'Yes': '#FFD700', 'No': '#004080'}
 
 # Main Tabs
-graph_tab = st.tabs(["📈 Demographics", "💼 Job Offers"])
+graph_tab = st.tabs(["📈 Demographics", "📊 Job Offers"])
 
 # === TAB 1 (Demographics) ===
 with graph_tab[0]:
     st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📈 Demographics</h1>
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>📊 Demographics</h1>
     """, unsafe_allow_html=True)
     
     chart_option = st.selectbox("Select Variable for Visualization", ['Gender Distribution', 'Field of Study'])
@@ -172,8 +172,7 @@ with graph_tab[0]:
             fig_density.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
-                title=dict(text=title, font=dict(color='#333')),
-                font=dict(color='#333'),
+                title=title,
                 xaxis_title="Age",
                 yaxis_title="Density",
                 height=500,
@@ -196,9 +195,7 @@ with graph_tab[0]:
             fig_donut.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
-                title=dict(text=f"{chart_option} Distribution (Donut Chart)", font=dict(color='#333')),
-                font=dict(color='#333'),
-                legend=dict(font=dict(color='#333')),
+                title=f"{chart_option} Distribution (Donut Chart)",
                 height=350,
                 margin=dict(t=40, l=40, r=40, b=40),
                 showlegend=True
@@ -246,7 +243,7 @@ job_offers_notes = {
 
 with graph_tab[1]:
     st.markdown("""
-        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 40px;'>💼 Job Offers</h1>
+        <h1 style='font-family: "Inter", sans-serif; color: #cf5a2e; font-size: 36px;'>Job Offers</h1>
     """, unsafe_allow_html=True)
 
 
@@ -319,18 +316,12 @@ with graph_tab[1]:
         fig_bar.update_layout(
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            title=dict(text=f"Entrepreneurship Distribution by Age – {selected_level} Level", font=dict(color='#333')),
-            font=dict(color='#333'),
-            legend_title_text='Entrepreneurship',
             margin=dict(t=40, l=40, r=40, b=40),
+            legend_title_text='Entrepreneurship',
             xaxis_tickangle=0,
             bargap=0.1,
-            xaxis=dict(
-                tickvals=even_ages,
-                titlefont=dict(color='#333'),
-                tickfont=dict(color='#333')
-            ),
-            yaxis=dict(title="Percentage", range=[0, 1], tickformat=".0%", titlefont=dict(color='#333'), tickfont=dict(color='#333')),
+            xaxis=dict(tickvals=even_ages),
+            yaxis=dict(title="Percentage", range=[0, 1], tickformat=".0%"),
             legend=dict(orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5)
         )
 
