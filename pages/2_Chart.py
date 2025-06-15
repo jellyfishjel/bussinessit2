@@ -397,7 +397,7 @@ with graph_tab[1]:
             <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #cf5a2e;">
                 📌 {title}
             </div>
-            <div style="font-size: 15px; color: #444;">
+            <div style="font-size: 12px; color: #444;">
                 {text}
             </div>
         </div>
@@ -406,7 +406,7 @@ with graph_tab[1]:
         note_col1, note_col2 = st.columns(2)
         
         with note_col1:
-            st.markdown(note_style.format(title=f"Entrepreneurship Distribution Key Note– {selected_level}", text=note_bar), unsafe_allow_html=True)
+            st.markdown(note_style.format(title=f"Entrepreneurship Distribution Key Note – {selected_level}", text=note_bar), unsafe_allow_html=True)
         
         with note_col2:
             st.markdown(note_style.format(title=f"Average Job Offers Key Note – {selected_level}", text=note_line), unsafe_allow_html=True)
