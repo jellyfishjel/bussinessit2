@@ -2,58 +2,55 @@ import streamlit as st
 from PIL import Image
 
 # ==== Page Config ====
-st.set_page_config(
-    page_title="Education Career Success",
-    layout="wide"
-)
+st.set_page_config(page_title="Education Career Success", layout="wide")
 
-# ==== Apply global styles (Inter font + sidebar color) ====
+# ==== Apply global styles ====
 from utils import apply_global_styles
 apply_global_styles()
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+def inject_styles():
+    with open("style/style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    st.markdown("""
+        <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
+        <style>
+            .fade-in {
+                animation: fadeIn 1.5s ease-in;
+            }
+            @keyframes fadeIn {
+                0% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+        </style>
+    """, unsafe_allow_html=True)
 
-local_css("style/style.css")
+inject_styles()
 
-# ==== Import Google Fonts + Fade-in CSS ====
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Bungee&display=swap" rel="stylesheet">
-    <style>
-        .fade-in {
-            animation: fadeIn 1.5s ease-in;
-        }
-        @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
-        }
-    </style>
-""", unsafe_allow_html=True)
+# ==== Render Header ====
+def render_header():
+    st.markdown("""
+        <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
+            <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
+                EDUCATION<br>CAREER<br>SUCCESS
+            </h1>
+        </div>
+    """, unsafe_allow_html=True)
 
-# ==== HEADER ====
-st.markdown("""
-    <div style='text-align: center; padding: 5px 20px 30px; margin-top: -60px;'>
-        <h1 style='font-family: "Bungee", sans-serif; font-size: 60px; color: #cf5a2e; line-height: 1.0; margin-bottom: 0px;'>
-            EDUCATION<br>CAREER<br>SUCCESS
-        </h1>
-    </div>
-""", unsafe_allow_html=True)
-
-# ==== SLOGAN ====
-st.markdown("""
- <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
-    <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
-        Insight into success, powered by data.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
-        Discover how different factors shape career paths—through interactive analytics.
-    </p>
-    <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
-        Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Seven.py</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
-    </p>
- </div>
-""", unsafe_allow_html=True)
+# ==== Render Slogan ====
+def render_slogan():
+    st.markdown("""
+        <div class="fade-in" style="text-align: center; max-width: 900px; margin: auto; padding-top: 20px;">
+            <p style="font-family: 'Inter', sans-serif; font-size: 25px; color: #cf5a2e; font-weight: bold;">
+                Insight into success, powered by data.
+            </p>
+            <p style="font-family: 'Inter', sans-serif; font-size: 18px; color: #222;">
+                Discover how different factors shape career paths—through interactive analytics.
+            </p>
+            <p style="font-family: 'Inter', sans-serif; font-size: 17px; color: #444;">
+                Developed using <b>Python, GitHub, and Streamlit</b> by <b style="color: #cf5a2e;">Team Seven.py</b> as part of the Python Project 2 for <b>Business IT 2</b> course at <b>Vietnamese–German University</b>.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
 
 # ==== OUR TEAM Title ====
 st.markdown("""
