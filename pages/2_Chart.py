@@ -139,8 +139,8 @@ with graph_tab[0]:
         """
     }
 
-if selected_level in level_descriptions:
-    st.markdown(f"<div style='margin-top: -10px; margin-bottom: 20px;'>{level_descriptions[selected_level]}</div>", unsafe_allow_html=True)
+    if selected_level in level_descriptions:
+        st.markdown(f"<div style='margin-top: -10px; margin-bottom: 20px;'>{level_descriptions[selected_level]}</div>", unsafe_allow_html=True)
 
     
     df_demo = gender_filtered[
