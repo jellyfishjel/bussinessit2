@@ -237,47 +237,25 @@ with graph_tab[0]:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.35, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_density, use_container_width=True)
+
         with col2:
             group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
             pie_data = df_demo[group_col].value_counts().reset_index()
             pie_data.columns = [group_col, 'Count']
 
-    labels = pie_data[group_col]
-    values = pie_data['Count']
-
-    fig_donut = go.Figure(data=[
-        go.Pie(
-            labels=labels,
-            values=values,
-            hole=0.5,
-            textinfo='percent+label',
-            insidetextorientation='radial',
-            marker=dict(line=dict(color='#fff', width=1))
-        )
-    ])
-
-    fig_donut.update_layout(
-        title={
-            'text': f"{group_col.replace('_', ' ')} Distribution (Donut Chart)",
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': dict(size=18, color='#333')
-        },
-        legend=dict(
-            orientation='h',
-            yanchor='bottom',
-            y=-0.3,
-            xanchor='center',
-            x=0.5,
-            font=dict(size=12)
-        ),
-        height=500,
-        margin=dict(t=40, l=20, r=20, b=80),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-    )
-
-    st.plotly_chart(fig_donut, use_container_width=True)
+            fig_pie = px.pie(
+                pie_data,
+                names=group_col,
+                values='Count',
+                title=f"{group_col.replace('_', ' ')} Composition",
+                color_discrete_sequence=px.colors.sequential.RdBu
+            )
+            fig_pie.update_layout(
+                height=500,
+                margin=dict(t=40, l=20, r=20, b=80),
+                legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5)
+            )
+            st.plotly_chart(fig_pie, use_container_width=True)
 
         # === Notes Section ===
         note_style = """
