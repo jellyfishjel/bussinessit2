@@ -5,10 +5,15 @@ import streamlit as st
 st.set_page_config(page_title="Education & Career Success", layout="wide")
 
 
+from utils import apply_global_styles
+apply_global_styles()
+
+
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
+local_css("style/style.css")
 
 # Google Fonts
 st.markdown("""
