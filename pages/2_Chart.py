@@ -239,18 +239,18 @@ with graph_tab[0]:
             st.plotly_chart(fig_density, use_container_width=True)
             
         with col2:
-    # Xác định cột nhóm theo tùy chọn biểu đồ
+    
             group_col = 'Gender' if chart_option == 'Gender Distribution' else 'Field_of_Study'
 
-    # Đếm số lượng mỗi nhóm
+    
             pie_data = df_demo[group_col].value_counts().reset_index()
             pie_data.columns = [group_col, 'Count']
 
-    # Gán nhãn và giá trị
+   
             labels = pie_data[group_col]
             values = pie_data['Count']
 
-    # Tạo biểu đồ donut
+    
             fig_donut = go.Figure(data=[
                 go.Pie(
                     labels=labels,
@@ -262,7 +262,7 @@ with graph_tab[0]:
                 )    
             ])
 
-    # Cấu hình giao diện biểu đồ
+    
             fig_donut.update_layout(
                 title={
                     'text': f"{group_col.replace('_', ' ')} Distribution (Donut Chart)",
@@ -284,7 +284,7 @@ with graph_tab[0]:
                 plot_bgcolor='rgba(0,0,0,0)',
             )
 
-            # Hiển thị biểu đồ trên Streamlit
+            
             st.plotly_chart(fig_donut, use_container_width=True)
 
 
