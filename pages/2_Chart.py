@@ -406,9 +406,9 @@ with graph_tab[1]:
         note_col1, note_col2 = st.columns(2)
         
         with note_col1:
-            st.markdown(note_style.format(title=f"Bar Chart Note – {selected_level}", text=note_bar), unsafe_allow_html=True)
+            st.markdown(note_style.format(title=f"Entrepreneurship Distribution Key Note– {selected_level}", text=note_bar), unsafe_allow_html=True)
         
         with note_col2:
-            st.markdown(note_style.format(title=f"Line Chart Note – {selected_level}", text=note_line), unsafe_allow_html=True)
+            st.markdown(note_style.format(title=f"Average Job Offers Key Note – {selected_level}", text=note_line), unsafe_allow_html=True)
 
 
