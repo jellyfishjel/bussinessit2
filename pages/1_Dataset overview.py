@@ -42,8 +42,8 @@ with tab1:
     
         
         <p>This website is our project for the Python course. The website contains interactive graphs that are created by 
-        using Python language to visualize information from the dataset in a more accessible way. We utilized popular Python l
-        ibraries such as Pandas, Matplotlib, and Seaborn to extract, analyze, and present our findings effectively.</p>
+        using Python language to visualize information from the dataset in a more accessible way. We utilized popular Python 
+        libraries such as Pandas, Matplotlib, and Seaborn to extract, analyze, and present our findings effectively.</p>
         </div>
     """, unsafe_allow_html=True)
 
