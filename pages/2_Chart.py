@@ -250,7 +250,7 @@ with graph_tab[0]:
                 background-color: #fff4ec;
                 border-left: 6px solid #cf5a2e;
                 padding: 18px 22px;
-                margin-top: 25px;
+                margin-top: 50px;
                 border-radius: 12px;
                 box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
                 font-family: 'Segoe UI', sans-serif;
