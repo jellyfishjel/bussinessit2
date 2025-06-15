@@ -330,7 +330,7 @@ with graph_tab[1]:
                 tickfont=dict(color='#333')
             ),
             yaxis=dict(title="Percentage", range=[0, 1], tickformat=".0%", titlefont=dict(color='#333'), tickfont=dict(color='#333')),
-            legend=dict(orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5,  font=dict(color='#333'))
+            legend=dict( title=dict(text='Entrepreneurship', font=dict(color='#333')), font=dict(color='#333'),orientation='h', yanchor='bottom', y=-0.3, xanchor='center', x=0.5)
         )
 
         df_avg_offers = (
