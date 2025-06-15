@@ -192,7 +192,7 @@ with graph_tab[0]:
                     y=-0.35,
                     xanchor="center",
                     x=0.5,
-                     font=dict(color='#333')
+                    font=dict(color='#333')
                 )
             )
             st.plotly_chart(fig_density, use_container_width=True)
