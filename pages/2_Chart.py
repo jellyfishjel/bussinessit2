@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from scipy.stats import gaussian_kde
 import numpy as np
 
-st.set_page_config(page_title="Entrepreneurship Insights", layout="wide")
+st.set_page_config(page_title="Education & Career Success Dashboard", layout="wide")
 
 from utils import apply_global_styles
 apply_global_styles()
