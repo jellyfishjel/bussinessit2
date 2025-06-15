@@ -247,8 +247,8 @@ with graph_tab[0]:
             
             note_style = """
             <div style="
-                background-color: #fff4ec;
-                border-left: 6px solid #cf5a2e;
+                background-color: #FADADD;
+                border-left: 6px solid #FB607F;
                 padding: 18px 22px;
                 margin-top: 50px;
                 border-radius: 12px;
